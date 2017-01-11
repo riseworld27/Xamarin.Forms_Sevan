@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<component format="1" id="UltimateSftp">
+  <name>Ultimate SFTP for Mobile</name>
+  <publisher>ComponentPro</publisher>
+  <publisher-url>http://www.componentpro.com/sftp.netcf/</publisher-url>
+  <version>6.1</version>
+  <summary>Fast and reliable SFTP component with intuitive API</summary>
+  <samples>
+    <sample id="ListFolder iOS">
+      <name>iOS Sample.</name>
+      <summary>Demonstrates How to connect to an SFTP server, list directory content, and download/view file on iOS.</summary>
+    </sample>
+    <sample id="SftpClient Android">
+      <name>Android Sample.</name>
+      <summary>Demonstrates How to connect to an SFTP server, list directory content, and download/view file on Android.</summary>
+    </sample>
+  </samples>
+</component>

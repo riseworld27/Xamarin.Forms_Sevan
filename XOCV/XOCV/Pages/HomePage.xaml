@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<base:XOCVPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:base="clr-namespace:XOCV.Pages.Base;assembly=XOCV"
+    xmlns:views="clr-namespace:XOCV.Views;assembly=XOCV"
+    x:Class="XOCV.Pages.HomePage"
+    Padding="20">
+    <StackLayout
+        VerticalOptions="FillAndExpand">
+        <StackLayout
+            Orientation="Horizontal"
+            Padding="10">
+            <Image
+                Source="LogoSevan.png"/>
+        </StackLayout>
+        <Frame
+            VerticalOptions="Fill"
+            BackgroundColor="{StaticResource WhiteColor}">
+            <StackLayout
+                Padding="4"
+                Orientation="Horizontal">
+                <Label 
+                    Text="Program Name:"
+                    FontAttributes="Bold"/>
+            </StackLayout>
+            <StackLayout
+                Padding="20">
+                <views:TappedListView
+                    ItemsSource="{Binding Companies}"
+                    ItemClickCommand="{Binding OpenCompanyCommand}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label 
+                                        Grid.Column="1"
+                                        Text="{Binding Name}"
+                                        FontAttributes="Bold"
+                                        VerticalOptions="CenterAndExpand"
+                                        VerticalTextAlignment="Center"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </views:TappedListView>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+</base:XOCVPage>

@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6BC8ED88-2882-458C-8E55-992873487418}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ListFolder</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG;FTP</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <Optimize>false</Optimize>
+    <WarningLevel>4</WarningLevel>
+    <ErrorReport>prompt</ErrorReport>
+    <ConsolePause>false</ConsolePause>
+    <MtouchLink>None</MtouchLink>
+    <MtouchDebug>true</MtouchDebug>
+    <AssemblyName>ListFolder</AssemblyName>
+    <MtouchI18n></MtouchI18n>
+    <MtouchArch>ARMv7</MtouchArch>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <DefineConstants>FTP</DefineConstants>
+    <FileAlignment>4096</FileAlignment>
+    <Optimize>true</Optimize>
+    <WarningLevel>4</WarningLevel>
+    <ErrorReport>prompt</ErrorReport>
+    <ConsolePause>false</ConsolePause>
+    <MtouchLink>None</MtouchLink>
+    <AssemblyName>ListFolder</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG;FTP</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <Optimize>false</Optimize>
+    <WarningLevel>4</WarningLevel>
+    <ErrorReport>prompt</ErrorReport>
+    <ConsolePause>false</ConsolePause>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchDebug>true</MtouchDebug>
+    <AssemblyName>FtpBrowserIos_CS</AssemblyName>
+    <IpaPackageName></IpaPackageName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <DefineConstants>FTP</DefineConstants>
+    <FileAlignment>4096</FileAlignment>
+    <Optimize>true</Optimize>
+    <WarningLevel>4</WarningLevel>
+    <ErrorReport>prompt</ErrorReport>
+    <ConsolePause>false</ConsolePause>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <AssemblyName>FtpBrowserIos_CS</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="Xamarin.iOS" />
+    <Reference Include="MonoTouch.Dialog-1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="ComponentPro.Common.iOS">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\ios-unified\ComponentPro.Common.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentPro.FileSystem.iOS">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\ios-unified\ComponentPro.FileSystem.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentPro.Network.iOS">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\ios-unified\ComponentPro.Network.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentPro.Sftp.iOS">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\ios-unified\ComponentPro.Sftp.iOS.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.plist" />
+    <Compile Include="Main.cs" />
+    <Compile Include="AppWindow.cs" />
+    <BundleResource Include="Resources\file.png" />
+    <BundleResource Include="Resources\folder.png" />
+    <BundleResource Include="Resources\link.png" />
+    <BundleResource Include="Resources\up.png" />
+    <ITunesArtwork Include="Resources\iTunesArtwork" />
+    <ITunesArtwork Include="Resources\iTunesArtwork%402x" />
+    <Compile Include="BusinessLogic\ClientLogic.cs" />
+    <Compile Include="BusinessLogic\SiteManager.cs" />
+    <Compile Include="Model\ConnectionInfo.cs" />
+    <Compile Include="Model\IConnectionInfo.cs" />
+    <Compile Include="Model\IObjectInfo.cs" />
+    <Compile Include="View\IClientBrowserView.cs" />
+    <Compile Include="View\IView.cs" />
+    <Compile Include="ConnectView.cs" />
+    <Compile Include="Util.cs" />
+    <Compile Include="FolderView.cs" />
+    <BundleResource Include="Resources\logo29.png" />
+    <BundleResource Include="Resources\logo50.png" />
+    <BundleResource Include="Resources\logo58.png" />
+    <BundleResource Include="Resources\logo72.png" />
+    <BundleResource Include="Resources\logo100.png" />
+    <BundleResource Include="Resources\logo114.png" />
+    <BundleResource Include="Resources\logo144.png" />
+    <BundleResource Include="Resources\logo57.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="BusinessLogic\" />
+    <Folder Include="Model\" />
+    <Folder Include="View\" />
+  </ItemGroup>
+</Project>

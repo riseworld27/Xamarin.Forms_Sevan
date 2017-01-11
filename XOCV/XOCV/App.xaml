@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application
+  xmlns="http://xamarin.com/schemas/2014/forms"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:converters="clr-namespace:XOCV.Converters;assembly=XOCV"
+  x:Class="XOCV.App">
+  <Application.Resources>
+    <ResourceDictionary x:Name="ThemeDictionary">
+
+      <!--COLORS-->
+      <Color x:Key="BlackColor">#FF000000</Color>
+      <Color x:Key="WhiteColor">#FFFFFFFF</Color>
+      <Color x:Key="GrayColor">#FF808080</Color>
+      <Color x:Key="RedColor">#FFFF0000</Color>
+      <Color x:Key="GreenLightColor">#63BD5B</Color>
+      <Color x:Key="GreenMoreColor">#4fb347</Color>
+
+      <!--LABELS-->
+      <Style x:Key="CustomLabel" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource WhiteColor}"/>
+      </Style>
+
+      <!--WORKSPACES-->
+      <Style x:Key="PollPage" TargetType="StackLayout">
+        <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+        <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+      </Style>
+
+      <!--CONVERTERS-->
+      <converters:InverseBooleanConverter x:Key="InvBoolConverter" />
+      <converters:StringToUpperConverter x:Key="StringToUpperConverter" />
+      <converters:CheckBoxBoolConverter x:Key="CheckBoxBoolConverter"/>
+
+    </ResourceDictionary>
+  </Application.Resources>
+</Application>

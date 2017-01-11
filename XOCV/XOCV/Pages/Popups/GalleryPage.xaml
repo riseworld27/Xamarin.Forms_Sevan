@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<base:XOCVPage
+  xmlns="http://xamarin.com/schemas/2014/forms"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:base="clr-namespace:XOCV.Pages.Base;assembly=XOCV"
+  xmlns:views="clr-namespace:XOCV.Views;assembly=XOCV"
+  x:Class="XOCV.Pages.Popups.GalleryPage"
+  Padding="5">
+	<StackLayout
+			HorizontalOptions = "FillAndExpand"
+			VerticalOptions = "FillAndExpand">
+		<views:CarouselLayout 
+				x:Name = "carousel"
+				ItemsSource = "{Binding CarouselPages, Mode = TwoWay}"
+				SelectedItem = "{Binding CurrentPage, Mode = TwoWay}"
+				HorizontalOptions = "FillAndExpand"
+				VerticalOptions = "FillAndExpand"/>
+		<StackLayout
+				x:Name = "pageIndicatorContainer"
+				TranslationY = "-50">
+			<views:PagerIndicatorDots
+					x:Name = "pageIndicator"
+					DotSize = "10"
+					DotColor = "Green"
+					ItemsSource = "{Binding CarouselPages, Mode = TwoWay}"
+					SelectedItem = "{Binding CurrentPage, Mode = TwoWay}"/>
+		</StackLayout>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width = "*" />
+				<ColumnDefinition Width = "*" />
+				<ColumnDefinition Width = "*" />
+			</Grid.ColumnDefinitions>
+			<Button
+				Grid.Column="0"
+		        Text="Replace photo"
+		        WidthRequest="150"
+		        Command="{Binding ReplaceCommand}"
+		        HorizontalOptions="Center"
+		        VerticalOptions="Center"
+		        TextColor="{StaticResource WhiteColor}"
+		        BackgroundColor="Gray"
+		        Opacity="0.85"/>
+			<Button
+				Grid.Column="1"
+		        Text="Take a picture"
+		        WidthRequest="150"
+		        Command="{Binding TakePictureCommand}"
+		        HorizontalOptions="Center"
+		        VerticalOptions="Center"
+		        TextColor="{StaticResource WhiteColor}"
+		        BackgroundColor="{StaticResource GreenLightColor}"
+		        Opacity="0.85"/>
+			<Button
+				Grid.Column="2"
+		        Text="Add from gallery"
+		        WidthRequest="150"
+		        Command="{Binding SelectPictureCommand}"
+		        HorizontalOptions="Center"
+		        VerticalOptions="Center"
+		        TextColor="{StaticResource WhiteColor}"
+		        BackgroundColor="{StaticResource GreenLightColor}"
+		        Opacity="0.85"/>
+			<Button
+				Grid.Column="3"
+		        Text="Delete photo"
+		        WidthRequest="150"
+		        Command="{Binding DeleteCommand}"
+		        HorizontalOptions="Center"
+		        VerticalOptions="Center"
+		        TextColor="{StaticResource WhiteColor}"
+		        BackgroundColor="Red"
+		        Opacity="0.85"/>
+		</Grid>
+	</StackLayout>
+</base:XOCVPage>

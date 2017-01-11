@@ -1,0 +1,29 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XOCV.iOS", "XOCV.iOS.csproj", "{DD761BBA-520F-42A2-A63A-0F3AAEDEFED1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+		Ad-Hoc|iPhone = Ad-Hoc|iPhone
+		AppStore|iPhone = AppStore|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DD761BBA-520F-42A2-A63A-0F3AAEDEFED1}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{DD761BBA-520F-42A2-A63A-0F3AAEDEFED1}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{DD761BBA-520F-42A2-A63A-0F3AAEDEFED1}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{DD761BBA-520F-42A2-A63A-0F3AAEDEFED1}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{DD761BBA-520F-42A2-A63A-0F3AAEDEFED1}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{DD761BBA-520F-42A2-A63A-0F3AAEDEFED1}.Debug|iPhone.Build.0 = Debug|iPhone
+		{DD761BBA-520F-42A2-A63A-0F3AAEDEFED1}.Release|iPhone.ActiveCfg = Release|iPhone
+		{DD761BBA-520F-42A2-A63A-0F3AAEDEFED1}.Release|iPhone.Build.0 = Release|iPhone
+		{DD761BBA-520F-42A2-A63A-0F3AAEDEFED1}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{DD761BBA-520F-42A2-A63A-0F3AAEDEFED1}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{DD761BBA-520F-42A2-A63A-0F3AAEDEFED1}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{DD761BBA-520F-42A2-A63A-0F3AAEDEFED1}.AppStore|iPhone.Build.0 = AppStore|iPhone
+	EndGlobalSection
+EndGlobal

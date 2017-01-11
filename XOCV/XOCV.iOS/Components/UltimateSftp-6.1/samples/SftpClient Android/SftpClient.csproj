@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5D8BBFA4-A434-4C26-B0CE-14EFDD5F2AB5}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <AssemblyName>SftpClient</AssemblyName>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ComponentProSamples</RootNamespace>
+    <FileAlignment>512</FileAlignment>
+    <AndroidApplication>true</AndroidApplication>
+    <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
+    <GenerateSerializationAssemblies>off</GenerateSerializationAssemblies>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;SFTP</DefineConstants>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <AndroidLinkMode>None</AndroidLinkMode>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;SFTP</DefineConstants>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
+    <AndroidSupportedAbis>armeabi,armeabi-v7a,x86</AndroidSupportedAbis>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Mono.Android" />
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Mono.Android.Export" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="MainActivity.cs" />
+    <Compile Include="Resources\Resource.Designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BrowserActivity.cs" />
+    <None Include="Resources\AboutResources.txt" />
+    <None Include="Assets\AboutAssets.txt" />
+    <AndroidResource Include="Resources\Layout\Main.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\ListItem.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\RemoteItem.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\RemoteSite.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\RemoteSiteMenu.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\Progress.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\RemoteItemContextMenu.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\OptionsMenu.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Values\Strings.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Drawable\item_background_selector.xml" />
+    <AndroidResource Include="Resources\Values\Color.xml" />
+    <AndroidResource Include="Resources\Drawable\file.png" />
+    <AndroidResource Include="Resources\Drawable\folder.png" />
+    <AndroidResource Include="Resources\Drawable\link.png" />
+    <AndroidResource Include="Resources\Drawable\up.png" />
+    <Content Include="Properties\AndroidManifest.xml" />
+    <AndroidResource Include="Resources\Values\Tags.xml" />
+    <Compile Include="BusinessLogic\ClientLogic.cs" />
+    <Compile Include="View\IView.cs" />
+    <AndroidResource Include="Resources\Drawable\Add.png" />
+    <Compile Include="BusinessLogic\SiteManager.cs" />
+    <Compile Include="Util.cs" />
+    <Compile Include="Model\ConnectionInfo.cs" />
+    <Compile Include="Model_Android\ConnectionInfo.cs" />
+    <Compile Include="Model\IObjectInfo.cs" />
+    <Compile Include="Model_Android\ParcelableCreator.cs" />
+    <Compile Include="AndroidSettings.cs" />
+    <Compile Include="Model\IConnectionInfo.cs" />
+    <Compile Include="View\IClientBrowserView.cs" />
+    <AndroidResource Include="Resources\Drawable\logo.png" />
+    <Compile Include="FileInfoListAdapter.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <!--To modify your build process, add your task inside one of the targets below and uncomment it. 
+      Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <Folder Include="BusinessLogic\" />
+    <Folder Include="View\" />
+    <Folder Include="Model\" />
+    <Folder Include="Model_Android\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="ComponentPro.Common.Android">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\android\ComponentPro.Common.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentPro.FileSystem.Android">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\android\ComponentPro.FileSystem.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentPro.Network.Android">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\android\ComponentPro.Network.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentPro.Sftp.Android">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\android\ComponentPro.Sftp.Android.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

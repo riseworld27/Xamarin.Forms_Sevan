@@ -1,0 +1,387 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ComponentPro.Common.Android</name>
+    </assembly>
+    <members>
+        <member name="T:ComponentPro.OptionValue">
+            <summary>
+            Represents the three-state value.
+            </summary>
+        </member>
+        <member name="F:ComponentPro.OptionValue.Auto">
+            <summary>
+            Auto-detect value.
+            </summary>
+        </member>
+        <member name="F:ComponentPro.OptionValue.Yes">
+            <summary>
+            Yes value.
+            </summary>
+        </member>
+        <member name="F:ComponentPro.OptionValue.No">
+            <summary>
+            No value.
+            </summary>
+        </member>
+        <member name="T:ComponentPro.AsyncEventArgs">
+            <summary>
+            Represents an asynchronous EventArgs that has members to determine whether it's raised by an asynchronous operation and get the user-defined object.
+            </summary>
+        </member>
+        <member name="P:ComponentPro.AsyncEventArgs.AsyncCall">
+            <summary>
+            Gets a boolean value indicating whether the event is raised in an asynchronous call.
+            </summary>
+        </member>
+        <member name="P:ComponentPro.AsyncEventArgs.UserState">
+            <summary>
+            Gets the user-token specified in an asynchronous call.
+            </summary>
+        </member>
+        <member name="T:ComponentPro.ExtendedAsyncCompletedEventHandler`1">
+            <summary>
+            Represents the method that will handle the asynchronous method completion events.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">An <see cref="T:ComponentPro.ExtendedAsyncCompletedEventArgs`1"/> that contains event data.</param>
+            <typeparam name="TResult">The type of the result produced by an asynchronous operation.</typeparam>
+            <remarks>
+            In .NET 4.5 and higher it's recommended to use <c>async</c> and <c>await</c> modifiers for asynchronous operations.
+            </remarks>
+        </member>
+        <member name="T:ComponentPro.ExtendedAsyncCompletedEventArgs`1">
+            <summary>
+            Provides data for the asynchronous method completion events.
+            </summary>
+            <typeparam name="TResult">The type of the result produced by an asynchronous operation.</typeparam>
+            <remarks>
+            In .NET 4.5 and higher it's recommended to use <c>async</c> and <c>await</c> modifiers for asynchronous operations.
+            </remarks>
+        </member>
+        <member name="P:ComponentPro.ExtendedAsyncCompletedEventArgs`1.Result">
+            <summary>
+            Gets the asynchronous operation result.
+            </summary>
+        </member>
+        <member name="P:c_D5.c_ABA">
+            <summary>
+            Gets assembly Mono.Posix, Version=2.0.0.0 (loaded via reflection). 
+            </summary>
+            <value>Assembly, never null.</value>
+        </member>
+        <member name="P:c_D5.c_ESG">
+            <summary>
+            Gets version of the mscorlib assembly.<br/>
+            </summary>
+        </member>
+        <member name="T:c_D5.c_WRG">
+            <summary>
+            A wraper providing part of the Mono.Unix.UnixSymbolicLinkInfo class functionality
+            </summary>
+        </member>
+        <member name="F:c_D5.c_WRG.c_ZAA">
+            <summary>
+            The instance of Mono.Unix.UnixSymbolicLinkInfo we are wrapping. 
+            </summary>
+        </member>
+        <member name="F:c_D5.c_WRG.c_BBA">
+            <summary>
+            An actual Type of the _inner instance.
+            </summary>
+        </member>
+        <member name="M:c_D5.c_WRG.#ctor(System.String)">
+            <summary>
+            Create an instance of UnixSymbolicLinkInfoWrapper over given path.
+            </summary>
+            <param name="path">Path to a symbolic link</param>
+        </member>
+        <member name="P:c_D5.c_WRG.c_B6">
+            <summary>
+            Gets target path of this symbolic link.
+            </summary>
+            <remarks>
+            It is a direct (shallow) target. If the target is also a link, it is not resolved, just its path is returned. 
+            </remarks>
+        </member>
+        <member name="T:ComponentPro.Diagnostics.UltimateConsoleTraceListener">
+            <summary>Directs tracing or debugging output to a <see cref="T:System.IO.TextWriter"></see> or to a <see cref="T:System.IO.Stream"></see>, such as <see cref="T:System.IO.FileStream"></see>.</summary>
+            <example source="$ComponentPro.Common\AddLogCapability"></example>
+        </member>
+        <member name="T:ComponentPro.Diagnostics.UltimateTextWriterTraceListener">
+            <summary>Directs tracing or debugging output to a <see cref="T:System.IO.TextWriter"></see> or to a <see cref="T:System.IO.Stream"></see>, such as <see cref="T:System.IO.FileStream"></see>.</summary>    
+            <example source="$ComponentPro.Common\AddLogCapability"></example>
+        </member>
+        <member name="T:ComponentPro.Diagnostics.UltimateTraceListener">
+            <summary>
+            Defines the base Trace Listener.
+            </summary>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.UltimateTraceListener.Dispose">
+            <summary>
+            Releases all the used resources.
+            </summary>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.UltimateTraceListener.Flush">
+            <summary>Flushes the output buffer, and causes buffered data to be written to the underlying stream.</summary>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.UltimateTraceListener.WriteIndent">
+            <summary>
+            Writes the indent to the listener you create when you implement this class,
+            and resets the System.Diagnostics.TraceListener.NeedIndent property to false.
+            </summary>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.UltimateTraceListener.Write(System.String)">
+            <summary>
+            When overridden in a derived class, writes the specified message to the listener you create in the derived class.
+            </summary>
+            <param name="message">A message to write.</param>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.UltimateTraceListener.WriteLine(System.String)">
+            <summary>
+            When overridden in a derived class, writes a message to the listener you create in the derived class, followed by a line terminator.
+            </summary>
+            <param name="message">A message to write.</param>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.UltimateTraceListener.TraceData(System.Object,ComponentPro.Diagnostics.TraceEventType,System.String,System.String)">
+            <summary>
+            Writes trace information, an array of data objects and event information to the listener specific output.
+            </summary>
+            <param name="source">An object to identify the source, typically the instance of the class that generated the trace event.</param>
+            <param name="eventType">One of the <see cref="T:ComponentPro.Diagnostics.TraceEventType"/> values specifying the type of event that has caused the trace.</param>
+            <param name="category">A category name used to organize the output. </param>
+            <param name="message">An <see cref="T:System.Object"></see> whose name is sent to the <see cref="P:System.Diagnostics.Trace.Listeners"></see>. </param>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.UltimateTraceListener.MatchesSource(System.Object,ComponentPro.Diagnostics.TraceEventType)">
+            <summary>
+            Indicates whether the given log information will be accepted by this listener.
+            </summary>
+            <param name="source">An object to identify the source, typically the instance of the class that generated the trace event.</param>
+            <param name="eventType">One of the <see cref="T:ComponentPro.Diagnostics.TraceEventType"/> values specifying the type of event that has caused the trace.</param>
+            <returns><c>true</c> to accept; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="P:ComponentPro.Diagnostics.UltimateTraceListener.SourceToListen">
+            <summary>
+            Gets or sets the source object to listen to.
+            </summary>
+        </member>
+        <member name="P:ComponentPro.Diagnostics.UltimateTraceListener.IndentSize">
+            <summary>
+            Gets or sets the indent size.
+            </summary>
+        </member>
+        <member name="P:ComponentPro.Diagnostics.UltimateTraceListener.IndentLevel">
+            <summary>
+            Gets or sets the indent level.
+            </summary>
+        </member>
+        <member name="P:ComponentPro.Diagnostics.UltimateTraceListener.IsThreadSafe">
+            <summary>
+            Indicates whether the listener is thread-safe.
+            </summary>
+        </member>
+        <member name="P:ComponentPro.Diagnostics.UltimateTraceListener.Level">
+            <summary>
+            Gets or sets the trace level.
+            </summary>
+            <remarks>
+            If you wish to set global trace level, set the <see cref="P:ComponentPro.Diagnostics.XTrace.Level"/> property.
+            </remarks>
+        </member>
+        <member name="P:ComponentPro.Diagnostics.UltimateTraceListener.NeedIndent">
+            <summary>
+            Indicates whether it needs indent.
+            </summary>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.UltimateTextWriterTraceListener.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:ComponentPro.Diagnostics.UltimateTextWriterTraceListener"></see> class with <see cref="T:System.IO.TextWriter"></see> as the output recipient.</summary>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.UltimateTextWriterTraceListener.#ctor(System.IO.Stream)">
+            <summary>Initializes a new instance of the <see cref="T:ComponentPro.Diagnostics.UltimateTextWriterTraceListener"></see> class with the specified name, using the stream as the recipient of the debugging and tracing output.</summary>
+            <param name="stream">A <see cref="T:System.IO.Stream"></see> that represents the stream the <see cref="T:ComponentPro.Diagnostics.UltimateTextWriterTraceListener"></see> writes to. </param>
+            <exception cref="T:System.ArgumentNullException">The stream is null. </exception>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.UltimateTextWriterTraceListener.#ctor(System.IO.TextWriter)">
+            <summary>Initializes a new instance of the <see cref="T:ComponentPro.Diagnostics.UltimateTextWriterTraceListener"></see> class with the specified name, using the specified writer as recipient of the tracing or debugging output.</summary>
+            <param name="writer">A <see cref="T:System.IO.TextWriter"></see> that receives the output from the <see cref="T:ComponentPro.Diagnostics.UltimateTextWriterTraceListener"></see>. </param>
+            <exception cref="T:System.ArgumentNullException">The writer is null. </exception>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.UltimateTextWriterTraceListener.#ctor(System.String)">
+            <summary>Initializes a new instance of the <see cref="T:ComponentPro.Diagnostics.UltimateTextWriterTraceListener"></see> class with the specified name, using the file as the recipient of the debugging and tracing output.</summary>
+            <param name="fileName">The name of the file the <see cref="T:ComponentPro.Diagnostics.UltimateTextWriterTraceListener"></see> writes to. </param>
+            <exception cref="T:System.ArgumentNullException">The stream is null. </exception>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.UltimateTextWriterTraceListener.#ctor(System.Object)">
+            <summary>Initializes a new instance of the <see cref="T:ComponentPro.Diagnostics.UltimateTextWriterTraceListener"></see> class with <see cref="T:System.IO.TextWriter"></see> as the output recipient.</summary>
+            <param name="targetToListen">The source object to listen to.</param>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.UltimateTextWriterTraceListener.#ctor(System.Object,System.IO.Stream)">
+            <summary>Initializes a new instance of the <see cref="T:ComponentPro.Diagnostics.UltimateTextWriterTraceListener"></see> class with the specified name, using the stream as the recipient of the debugging and tracing output.</summary>
+            <param name="stream">A <see cref="T:System.IO.Stream"></see> that represents the stream the <see cref="T:ComponentPro.Diagnostics.UltimateTextWriterTraceListener"></see> writes to. </param>
+            <param name="targetToListen">The source object to listen to.</param>
+            <exception cref="T:System.ArgumentNullException">The stream is null. </exception>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.UltimateTextWriterTraceListener.#ctor(System.Object,System.IO.TextWriter)">
+            <summary>Initializes a new instance of the <see cref="T:ComponentPro.Diagnostics.UltimateTextWriterTraceListener"></see> class with the specified name, using the specified writer as recipient of the tracing or debugging output.</summary>
+            <param name="writer">A <see cref="T:System.IO.TextWriter"></see> that receives the output from the <see cref="T:ComponentPro.Diagnostics.UltimateTextWriterTraceListener"></see>. </param>
+            <param name="targetToListen">The source object to listen to.</param>
+            <exception cref="T:System.ArgumentNullException">The writer is null. </exception>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.UltimateTextWriterTraceListener.#ctor(System.Object,System.String)">
+            <summary>Initializes a new instance of the <see cref="T:ComponentPro.Diagnostics.UltimateTextWriterTraceListener"></see> class with the specified name, using the file as the recipient of the debugging and tracing output.</summary>
+            <param name="fileName">The name of the file the <see cref="T:ComponentPro.Diagnostics.UltimateTextWriterTraceListener"></see> writes to. </param>
+            <param name="targetToListen">The source object to listen to.</param>
+            <exception cref="T:System.ArgumentNullException">The stream is null. </exception>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.UltimateTextWriterTraceListener.Dispose">
+            <summary>Closes the <see cref="P:ComponentPro.Diagnostics.UltimateTextWriterTraceListener.Writer"></see> so that it no longer receives tracing or debugging output.</summary>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.UltimateTextWriterTraceListener.Flush">
+            <summary>Flushes the output buffer for the <see cref="P:ComponentPro.Diagnostics.UltimateTextWriterTraceListener.Writer"></see>.</summary>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.UltimateTextWriterTraceListener.Write(System.String)">
+            <summary>Writes a message to this instance's <see cref="P:ComponentPro.Diagnostics.UltimateTextWriterTraceListener.Writer"></see>.</summary>
+            <param name="message">A message to write. </param>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.UltimateTextWriterTraceListener.WriteLine(System.String)">
+            <summary>Writes a message to this instance's <see cref="P:ComponentPro.Diagnostics.UltimateTextWriterTraceListener.Writer"></see> followed by a line terminator. The default line terminator is a carriage return followed by a line feed (\r\n).</summary>
+            <param name="message">A message to write. </param>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.UltimateTextWriterTraceListener.TraceData(System.Object,ComponentPro.Diagnostics.TraceEventType,System.String,System.String)">
+            <summary>
+            Writes trace information, an array of data objects and event information to the listener specific output.
+            </summary>
+            <param name="source">An object to identify the source, typically the instance of the class that generated the trace event.</param>
+            <param name="eventType">One of the <see cref="T:ComponentPro.Diagnostics.TraceEventType"/> values specifying the type of event that has caused the trace.</param>
+            <param name="category">A category name used to organize the output. </param>
+            <param name="message">An <see cref="T:System.Object"></see> whose name is sent to the <see cref="P:System.Diagnostics.Trace.Listeners"></see>. </param>
+        </member>
+        <member name="P:ComponentPro.Diagnostics.UltimateTextWriterTraceListener.FileName">
+            <summary>
+            Gets or sets the log file name.
+            </summary>
+        </member>
+        <member name="P:ComponentPro.Diagnostics.UltimateTextWriterTraceListener.Writer">
+            <summary>Gets or sets the text writer that receives the tracing or debugging output.</summary>
+            <returns>A <see cref="T:System.IO.TextWriter"></see> that represents the writer that receives the tracing or debugging output.</returns>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.UltimateConsoleTraceListener.TraceData(System.Object,ComponentPro.Diagnostics.TraceEventType,System.String,System.String)">
+            <summary>
+            Writes trace information, an array of data objects and event information to the listener specific output.
+            </summary>
+            <param name="source">A name used to identify the output, typically the name of the application that generated the trace event.</param>
+            <param name="eventType">One of the <see cref="T:ComponentPro.Diagnostics.TraceEventType"/> values specifying the type of event that has caused the trace.</param>
+            <param name="category">A category name used to organize the output. </param>
+            <param name="message">An <see cref="T:System.Object"></see> whose name is sent to the <see cref="P:System.Diagnostics.Trace.Listeners"></see>. </param>
+        </member>
+        <member name="T:ComponentPro.Diagnostics.TraceEventType">
+            <summary>
+            Identifies the type of event that has caused the trace.
+            </summary>
+        </member>
+        <member name="F:ComponentPro.Diagnostics.TraceEventType.Critical">
+            <summary>
+            Fatal error or application crash.
+            </summary>
+        </member>
+        <member name="F:ComponentPro.Diagnostics.TraceEventType.Error">
+            <summary>
+            Recoverable error.
+            </summary>
+        </member>
+        <member name="F:ComponentPro.Diagnostics.TraceEventType.Warning">
+            <summary>
+            Noncritical problem.
+            </summary>
+        </member>
+        <member name="F:ComponentPro.Diagnostics.TraceEventType.Information">
+            <summary>
+            Informational message.
+            </summary>
+        </member>
+        <member name="F:ComponentPro.Diagnostics.TraceEventType.Verbose">
+            <summary>
+            Debugging trace.
+            </summary>
+        </member>
+        <member name="F:ComponentPro.Diagnostics.TraceEventType.Transfer">
+            <summary>
+            Debugging trace and data transfer.
+            </summary>
+        </member>
+        <member name="T:ComponentPro.Diagnostics.XTrace">
+            <summary>Provides a set of methods and properties that help Ultimate Network Component and you trace the execution of code. This class cannot be inherited.</summary>
+            <example source="$ComponentPro.Common\AddLogCapability"></example>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.XTrace.Close">
+            <summary>Flushes the output buffer, and then closes the <see cref="P:ComponentPro.Diagnostics.XTrace.Listeners"></see>.</summary>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.XTrace.Flush">
+            <summary>Flushes the output buffer, and causes buffered data to be written to the <see cref="P:ComponentPro.Diagnostics.XTrace.Listeners"></see>.</summary>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.XTrace.Indent">
+            <summary>Increases the current <see cref="P:System.Diagnostics.Trace.IndentLevel"></see> by one.</summary>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.XTrace.Unindent">
+            <summary>Decreases the current <see cref="P:System.Diagnostics.Trace.IndentLevel"></see> by one.</summary>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.XTrace.WriteLine(System.Object,ComponentPro.Diagnostics.TraceEventType,System.String,System.String,System.Byte[],System.Int32,System.Int32)">
+            <summary>Writes a category name and a message with additional data buffer to the trace listeners in the <see cref="P:System.Diagnostics.Trace.Listeners"></see> collection.</summary>
+            <param name="category">A category name used to organize the output. </param>
+            <param name="message">A message to write. </param>
+            <param name="eventType">The event type.</param>
+            <param name="source">The source object.</param>
+            <param name="buffer">The data buffer.</param>
+            <param name="count">The number of bytes to write.</param>
+            <param name="offset">The buffer offset.</param>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.XTrace.WriteLine(System.Object,ComponentPro.Diagnostics.TraceEventType,System.String,System.String,System.Object[])">
+            <summary>Writes a category name and the value of the object's <see cref="M:System.Object.ToString"></see> method to the trace listeners in the <see cref="P:System.Diagnostics.Trace.Listeners"></see> collection.</summary>
+            <param name="category">A category name used to organize the output. </param>
+            <param name="format">An <see cref="T:System.Object"></see> whose name is sent to the <see cref="P:System.Diagnostics.Trace.Listeners"></see>. </param>
+            <param name="args">The argument.</param>
+            <param name="eventType">The event type.</param>
+            <param name="source">The source object.</param>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.XTrace.WriteLine(System.Object,ComponentPro.Diagnostics.TraceEventType,System.String,System.String)">
+            <summary>Writes a category name and the value of the object's <see cref="M:System.Object.ToString"></see> method to the trace listeners in the <see cref="P:System.Diagnostics.Trace.Listeners"></see> collection.</summary>
+            <param name="category">A category name used to organize the output. </param>
+            <param name="message">An <see cref="T:System.Object"></see> whose name is sent to the <see cref="P:System.Diagnostics.Trace.Listeners"></see>. </param>
+            <param name="eventType">The event type.</param>
+            <param name="source">The source object.</param>
+        </member>
+        <member name="M:ComponentPro.Diagnostics.XTrace.HasListeners">
+            <summary>
+            Gets a boolean value indicating whether at least one listener has been attached.
+            </summary>
+        </member>
+        <member name="P:ComponentPro.Diagnostics.XTrace.AutoFlush">
+            <summary>Gets or sets whether <see cref="M:System.Diagnostics.Trace.Flush"></see> should be called on the <see cref="P:System.Diagnostics.Trace.Listeners"></see> after every write.</summary>
+            <returns>true if <see cref="M:System.Diagnostics.Trace.Flush"></see> is called on the <see cref="P:System.Diagnostics.Trace.Listeners"></see> after every write; otherwise, false.</returns>
+        </member>
+        <member name="P:ComponentPro.Diagnostics.XTrace.IndentLevel">
+            <summary>Gets or sets the indent level.</summary>
+            <returns>The indent level. The default is zero.</returns>
+        </member>
+        <member name="P:ComponentPro.Diagnostics.XTrace.IndentSize">
+            <summary>Gets or sets the number of spaces in an indent.</summary>
+            <returns>The number of spaces in an indent. The default is four.</returns>
+        </member>
+        <member name="P:ComponentPro.Diagnostics.XTrace.Listeners">
+            <summary>Gets the collection of listeners that is monitoring the trace output.</summary>
+            <returns>A <see cref="T:ComponentPro.Diagnostics.XTraceListenerCollection"></see> that represents a collection of type <see cref="T:System.Diagnostics.TraceListener"></see> monitoring the trace output.</returns>
+        </member>
+        <member name="P:ComponentPro.Diagnostics.XTrace.UseGlobalLock">
+            <summary>Gets or sets a value indicating whether the global lock should be used.  </summary>
+            <returns>true if the global lock is to be used; otherwise, false. The default is true.</returns>
+        </member>
+        <member name="P:ComponentPro.Diagnostics.XTrace.Level">
+            <summary>
+            Gets or sets the trace level.
+            </summary>
+        </member>
+        <member name="T:ComponentPro.Diagnostics.XTraceListenerCollection">
+            <summary>Provides a thread-safe list of <see cref="T:System.Diagnostics.TraceListener"></see> objects.</summary>
+        </member>
+    </members>
+</doc>

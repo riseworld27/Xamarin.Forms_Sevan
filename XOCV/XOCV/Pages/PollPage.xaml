@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<base:XOCVPage 
+  xmlns="http://xamarin.com/schemas/2014/forms"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:base="clr-namespace:XOCV.Pages.Base;assembly=XOCV"
+  x:Class="XOCV.Pages.PollPage">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/> 
+      <RowDefinition/>
+      <RowDefinition Height="50"/>
+    </Grid.RowDefinitions>
+    <Grid 
+      Padding="25, 20, 25, 0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="0.50*"/>       
+        <ColumnDefinition Width="0.50*"/>
+      </Grid.ColumnDefinitions>
+      <Label
+        Text="{Binding CurrentFormName}"
+        FontSize="30"
+        VerticalOptions="CenterAndExpand"/>
+      <StackLayout 
+        Grid.Column="1"
+        Orientation="Horizontal"
+        HorizontalOptions="EndAndExpand">
+        <Button
+            WidthRequest="200"
+            Text="Save all images to gallery"
+            Command="{Binding SaveAllPicturesToGalleryCommand}"
+            HorizontalOptions="EndAndExpand"
+            VerticalOptions="End"
+            TextColor="{StaticResource WhiteColor}"
+            BackgroundColor="{StaticResource GrayColor}"
+            Opacity="0.85"/>
+        <Button
+            WidthRequest="100"
+            Text="Close"
+            Command="{Binding ExitCommand}"
+            HorizontalOptions="EndAndExpand"
+            VerticalOptions="End"
+            TextColor="{StaticResource WhiteColor}"
+            BackgroundColor="{StaticResource GrayColor}"
+            Opacity="0.85"/>
+        <Button
+          WidthRequest="100"
+          Text="Finish"
+          Command="{Binding SavePollResultCommand}"
+          HorizontalOptions="EndAndExpand"
+          VerticalOptions="End"
+          TextColor="{StaticResource WhiteColor}"
+          BackgroundColor="{StaticResource GreenLightColor}"
+          Opacity="0.85"/>
+      </StackLayout>  
+    </Grid>
+    <ScrollView 
+      Grid.Row="1"
+      x:Name="currentScrollView"
+      IsVisible="{Binding IsAuthorized}"
+      HorizontalOptions="FillAndExpand"
+      VerticalOptions="FillAndExpand"
+      Padding="25, 10, 25, 5">
+      <Frame
+        x:Name="currentFrame"
+        Opacity="0.85"
+        Padding="0">
+        <StackLayout
+          x:Name="currentPage"
+          Style="{StaticResource PollPage}"
+          Padding="25"
+          Spacing="10"/>
+      </Frame>
+    </ScrollView>
+    <ScrollView 
+      Grid.Row="2"
+      x:Name="navigationScrollView"
+      IsVisible="{Binding IsAuthorized}"
+      HorizontalOptions="FillAndExpand"
+      VerticalOptions="FillAndExpand"
+      Padding="25, 0, 25, 0"
+      Orientation="Horizontal"
+      BackgroundColor="{StaticResource BlackColor}">
+      <StackLayout
+        x:Name="navigationPage"
+        HorizontalOptions="StartAndExpand"
+        Orientation="Horizontal"/>
+    </ScrollView>
+  </Grid>
+</base:XOCVPage>

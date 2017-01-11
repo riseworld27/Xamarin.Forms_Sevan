@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="ApplicationName">ComponentPro SFTP Client</string>
+	<string name="DisconnectText">Disconnect</string>
+	<string name="ViewText">Preview content</string>
+	<string name="DownloadText">Download</string>
+	<string name="SiteTitleText">Available SFTP sites</string>
+	<string name="ComponentLinkText">Powered by Ultimate SFTP component for Android</string>
+	<string name="ComponentLinkUrlText">http://www.componentpro.com/sftp.net/</string>
+	<string name="ConnectText">Connect</string>
+</resources>
