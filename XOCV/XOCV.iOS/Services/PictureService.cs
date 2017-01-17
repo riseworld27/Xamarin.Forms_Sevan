@@ -17,6 +17,10 @@ namespace XOCV.iOS.Services
 {
     public class PictureService : IPictureService
     {
+		//Todo: set proper value
+		public static int RESIZE_LIMIT = 500;
+		public static int RESIZE_RATIO = 5;
+			
         Sftp client;
         string documentsDirectory;
 
@@ -69,7 +73,8 @@ namespace XOCV.iOS.Services
         {
             var renderer = new StreamImagesourceHandler ();
             var photo = await renderer.LoadImageAsync (imgSrc);
-			if (photo.Size.Width > 2000 && photo.Size.Height > 2000)
+
+			if (photo.Size.Width > RESIZE_LIMIT || photo.Size.Height > RESIZE_LIMIT)
 			{
 				var smallImage = GetSmallImage(photo);
 				photo.Dispose();
@@ -104,7 +109,8 @@ namespace XOCV.iOS.Services
 					photo = UIImage.LoadFromData(data);
 				}
 			}
-			if (photo.Size.Width > 2000 && photo.Size.Height > 2000)
+
+			if (photo.Size.Width > RESIZE_LIMIT || photo.Size.Height > RESIZE_LIMIT)
 			{
 				var smallImage = GetSmallImage(photo);
 				photo.Dispose();
@@ -188,8 +194,8 @@ namespace XOCV.iOS.Services
 
         private UIImage GetSmallImage (UIImage source)
         {
-            nfloat width = source.Size.Width / 3;
-            nfloat height = source.Size.Height / 3;
+			nfloat width = source.Size.Width / RESIZE_RATIO;
+			nfloat height = source.Size.Height / RESIZE_RATIO;
             UIGraphics.BeginImageContext (new SizeF ((int)width, (int)height));
             source.Draw (new RectangleF (0, 0, (int)width, (int)height));
             var resultImage = UIGraphics.GetImageFromCurrentImageContext ();
