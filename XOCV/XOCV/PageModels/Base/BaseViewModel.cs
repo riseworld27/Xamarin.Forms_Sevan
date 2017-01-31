@@ -1,6 +1,6 @@
 ﻿using FreshMvvm;
 
-namespace XOCV.ViewModels.Base
+namespace XOCV.PageModels.Base
 {
     public class BasePageModel : FreshBasePageModel
     {

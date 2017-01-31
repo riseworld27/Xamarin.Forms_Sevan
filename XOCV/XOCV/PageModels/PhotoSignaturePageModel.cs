@@ -6,8 +6,7 @@ using System.Windows.Input;
 using PropertyChanged;
 using Xamarin.Forms;
 using XOCV.Interfaces;
-using XOCV.Models.ResponseModels;
-using XOCV.ViewModels.Base;
+using XOCV.PageModels.Base;
 
 namespace XOCV.PageModels
 {
@@ -40,20 +39,20 @@ namespace XOCV.PageModels
 
 		public override void Init(object initData)
 		{
-			PictureService = DependencyService.Get<IPictureService>();
-			base.Init(initData);
-			MediaPath = (string)initData;
-			var byteArray = DependencyService.Get<IPictureService>().ImagePathToBinary(MediaPath);
-			var streamSource = new StreamImageSource
-			{
-				Stream = new Func<CancellationToken, Task<Stream>>(async (arg) => new MemoryStream(byteArray))
-			};
+            PictureService = DependencyService.Get<IPictureService>();
+            base.Init(initData);
+            MediaPath = (string)initData;
+            var byteArray = DependencyService.Get<IPictureService>().ImagePathToBinary(MediaPath);
+            var streamSource = new StreamImageSource
+            {
+                Stream = new Func<CancellationToken, Task<Stream>>(async (arg) => new MemoryStream(byteArray))
+            };
 
-			ImageMedia = new Image
-			{
-				Source = streamSource
-			};
-			ImageSize = PictureService.GetPictureSize(ImageMedia.Source);
+            ImageMedia = new Image
+            {
+                Source = streamSource
+            };
+            ImageSize = PictureService.GetPictureSize(ImageMedia.Source);
 		}
 
 		private void SavePictureCommandExecute()
@@ -64,5 +63,3 @@ namespace XOCV.PageModels
 		}
 	}
 }
-
-

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace XOCV.Gestures
@@ -7,7 +6,7 @@ namespace XOCV.Gestures
 	public class LongPressGesture : Element, IGestureRecognizer
 	{
 		public static readonly BindableProperty CommandProperty = 
-			BindableProperty.Create("Command", 
+            BindableProperty.Create("Command", 
 			                        typeof(ICommand), 
 			                        typeof(LongPressGesture), 
 			                        (object)null, BindingMode.OneWay, 
@@ -41,4 +40,3 @@ namespace XOCV.Gestures
 		}
 	}
 }
-

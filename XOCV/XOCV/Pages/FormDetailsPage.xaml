@@ -1,224 +1,233 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<base:XOCVPage
+<base:XOCVPage 
   xmlns="http://xamarin.com/schemas/2014/forms"
-  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-  xmlns:base="clr-namespace:XOCV.Pages.Base;assembly=XOCV"
-  xmlns:views="clr-namespace:XOCV.Views;assembly=XOCV"
-  x:Class="XOCV.Pages.FormDetailsPage"
-  Padding="20">
-  <StackLayout
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:base="clr-namespace:XOCV.Pages.Base;assembly=XOCV"
+	xmlns:views="clr-namespace:XOCV.Views;assembly=XOCV"
+	x:Class="XOCV.Pages.FormDetailsPage"
+	Padding="20">
+	<StackLayout 
     VerticalOptions="FillAndExpand">
-    <StackLayout 
-      Orientation="Horizontal" 
-      Padding="10">
-      <Image 
+		<StackLayout 
+      Orientation="Horizontal"
+			Padding="10">
+			<Image 
         Source="LogoSevan.png"/>
-      <Button
-        Text="+ Add new capture"
-        WidthRequest="150"
-        Command="{Binding AddNewCaptureCommand}"
+      <views:CustomButton
+        Text="Settings"
+        WidthRequest="100"
+        Command="{Binding OpenSettingsCommand}"
         HorizontalOptions="EndAndExpand"
         VerticalOptions="End"
         TextColor="{StaticResource WhiteColor}"
-        BackgroundColor="{StaticResource GreenLightColor}"
-        Opacity="0.85"/>
+        BackgroundColor="{StaticResource GrayColor}"
+        Opacity="0.85"
+		    Margin = "0, 0, 10, 0"/>
+        <views:CustomButton 
+          Text="+ Add new capture"
+				  WidthRequest="150"
+				  Command="{Binding AddNewCaptureCommand}"
+				  HorizontalOptions="EndAndExpand"
+				  VerticalOptions="End"
+				  TextColor="{StaticResource WhiteColor}"
+				  BackgroundColor="{StaticResource GreenLightColor}"
+				  Opacity="0.85"/>
     </StackLayout>
-    <Frame 
-      VerticalOptions="Fill" 
-      BackgroundColor="{StaticResource WhiteColor}">
-      <StackLayout 
+		<Frame 
+      VerticalOptions="Fill"
+			OutlineColor="Silver"
+			BackgroundColor="{StaticResource WhiteColor}">
+			<StackLayout 
         Orientation="Vertical">
-        <StackLayout
+				<StackLayout 
           Spacing="4">
-          <StackLayout
+					<StackLayout 
             Orientation="Horizontal">
-            <Label 
+						<views:CustomLabel 
               Text="Form Name: "
-              TextColor="{StaticResource GreenLightColor}"
-              FontAttributes="Bold"/>
-            <Label 
+							TextColor="{StaticResource GreenLightColor}"
+							FontAttributes="Bold" />
+						<views:CustomLabel 
               Text="{Binding AvailableForms.FormsTitle}"
-              TextColor="{StaticResource GreenLightColor}"/>
-          </StackLayout>
-          <StackLayout
+							TextColor="{StaticResource GreenLightColor}"/>
+					</StackLayout>
+					<StackLayout 
             Orientation="Horizontal">
-            <Label
+						<views:CustomLabel 
               Text="Form Description: "
-              TextColor="{StaticResource GreenLightColor}"
-              FontAttributes="Bold"/>
-            <Label 
+							TextColor="{StaticResource GreenLightColor}"
+							FontAttributes="Bold"/>
+						<views:CustomLabel 
               Text="{Binding AvailableForms.Description}"
-              LineBreakMode="WordWrap"
-              TextColor="{StaticResource GreenLightColor}"/>
-          </StackLayout>
-          <StackLayout
-            Orientation="Horizontal">
-            <Label
-              Text="Instructions: "
-              TextColor="{StaticResource GreenLightColor}"
-              FontAttributes="Bold"/>
-            <Label 
-              Text="{Binding AvailableForms.Instructions}"/>
-          </StackLayout>
-        </StackLayout>
-        <StackLayout>
-          <Grid>
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="0.03*"/>
-              <ColumnDefinition Width="0.1*"/>
-              <ColumnDefinition Width="0.17*"/>
-              <ColumnDefinition Width="0.2*"/>
-              <ColumnDefinition Width="0.2*"/>
-              <ColumnDefinition Width="0.2*"/>
-            </Grid.ColumnDefinitions>
-            <views:CheckBox 
-                x:Name="CheckAllItems" 
-                Grid.Column="0" 
-                Checked="{Binding IsAllItemsSelected, Mode=TwoWay}"   
-                VerticalOptions="CenterAndExpand" 
-                WidthRequest="25" 
-                HeightRequest="25" 
-                HorizontalOptions ="CenterAndExpand">
-                <views:CheckBox.GestureRecognizers>
-                    <TapGestureRecognizer 
-                        Command="{Binding ChangeSelectionForAllItemsCommand}"/>
-                </views:CheckBox.GestureRecognizers>
-            </views:CheckBox>
-            <Label
+							LineBreakMode="WordWrap"
+							TextColor="{StaticResource GreenLightColor}"/>
+					</StackLayout>
+				</StackLayout>
+				<StackLayout>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="0.03*" />
+							<ColumnDefinition Width="0.1*" />
+							<ColumnDefinition Width="0.17*" />
+							<ColumnDefinition Width="0.2*" />
+							<ColumnDefinition Width="0.2*" />
+							<ColumnDefinition Width="0.2*" />
+						</Grid.ColumnDefinitions>
+						<views:CheckBox 
+              x:Name="CheckAllItems"
+							Grid.Column="0"
+							Checked="{Binding IsAllItemsSelected, Mode=TwoWay}"
+							VerticalOptions="CenterAndExpand"
+							WidthRequest="25"
+							HeightRequest="25"
+							HorizontalOptions="CenterAndExpand">
+							<views:CheckBox.GestureRecognizers>
+								<TapGestureRecognizer 
+                  Command="{Binding ChangeSelectionForAllItemsCommand}"/>
+							</views:CheckBox.GestureRecognizers>
+						</views:CheckBox>
+						<views:CustomLabel 
               Grid.Column="1"
-              Text="Date"
-              FontAttributes="Bold"
-              HorizontalOptions="CenterAndExpand"/>
-            <Label
+							Text="Date"
+							FontAttributes="Bold"
+							HorizontalOptions="CenterAndExpand"/>
+						<views:CustomLabel 
               Grid.Column="2"
-              Text="Store Number"
-              FontAttributes="Bold"
-              HorizontalOptions="CenterAndExpand"/>
-            <Label
+							Text="Store Number"
+							FontAttributes="Bold"
+							HorizontalOptions="CenterAndExpand"/>
+						<views:CustomLabel 
               Grid.Column="3"
-              Text="Completion Status"
-              FontAttributes="Bold"
-              HorizontalOptions="CenterAndExpand"/>
-            <Label
+							Text="Completion Status"
+							FontAttributes="Bold"
+							HorizontalOptions="CenterAndExpand"/>
+						<views:CustomLabel 
               Grid.Column="4"
-              Text="Sync Status"
-              FontAttributes="Bold"
-              HorizontalOptions="CenterAndExpand"/>
-            <Label
+							Text="Sync Status"
+							FontAttributes="Bold"
+							HorizontalOptions="CenterAndExpand"/>
+						<views:CustomLabel 
               Grid.Column="5"
-              Text="Options"
-              HorizontalOptions="CenterAndExpand"/>
-          </Grid>
-          <ListView
+							Text="Options"
+							HorizontalOptions="CenterAndExpand"/>
+					</Grid>
+					<ListView 
             HeightRequest="500"
-            ItemsSource="{Binding DbModels}">
-            <ListView.ItemTemplate>
-              <DataTemplate>
-                <ViewCell>
-                  <Grid>
-                    <Grid.ColumnDefinitions>
-                      <ColumnDefinition Width="0.03*"/>
-                      <ColumnDefinition Width="0.1*"/>
-                      <ColumnDefinition Width="0.17*"/>
-                      <ColumnDefinition Width="0.2*"/>
-                      <ColumnDefinition Width="0.2*"/>
-                      <ColumnDefinition Width="0.2*"/>
-                    </Grid.ColumnDefinitions>
-                    <views:CheckBox 
-                          x:Name = "checkItem" 
-                          Grid.Column="0" 
-                          Checked="{Binding IsSelected, Mode=TwoWay}"  
-                          VerticalOptions="CenterAndExpand" 
-                          WidthRequest="25" 
-                          HeightRequest="25" 
-                          HorizontalOptions ="CenterAndExpand"/>
-                    <Label
+						ItemsSource="{Binding DbModels}">
+						<ListView.ItemTemplate>
+							<DataTemplate>
+								<ViewCell>
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="0.03*" />
+											<ColumnDefinition Width="0.1*" />
+											<ColumnDefinition Width="0.17*" />
+											<ColumnDefinition Width="0.2*" />
+											<ColumnDefinition Width="0.2*" />
+											<ColumnDefinition Width="0.2*" />
+										</Grid.ColumnDefinitions>
+										<views:CheckBox 
+                      x:Name="checkItem"
+											Grid.Column="0"
+											Checked="{Binding IsSelected, Mode=TwoWay}"
+											VerticalOptions="CenterAndExpand"
+											WidthRequest="25"
+											HeightRequest="25"
+											HorizontalOptions="CenterAndExpand"/>
+										<views:CustomLabel 
                       Grid.Column="1"
-                      Text="{Binding Date}"
-                      HorizontalOptions="CenterAndExpand"/>
-                    <Label
+											Text="{Binding Date, StringFormat='{0:dd/MM/yy}'}"
+                      HorizontalOptions="CenterAndExpand" 
+                      VerticalOptions="CenterAndExpand"/>
+										<views:CustomLabel 
                       Grid.Column="2"
-                      Text="{Binding StoreNumber}"
-                      HorizontalOptions="CenterAndExpand"/>
-                    <Label
+											Text="{Binding StoreNumber}"
+											HorizontalOptions="CenterAndExpand" 
+                      VerticalOptions="CenterAndExpand"/>
+										<views:CustomLabel 
                       Grid.Column="3"
-                      Text="{Binding FormStatus}"
-                      HorizontalOptions="CenterAndExpand"/>
-                    <Label
+											Text="{Binding FormStatus}"
+											HorizontalOptions="CenterAndExpand" 
+                      VerticalOptions="CenterAndExpand"/>
+										<views:CustomLabel 
                       Grid.Column="4"
-                      Text="{Binding SyncStatus}"
-                      HorizontalOptions="CenterAndExpand"/>
-                    <StackLayout
+											Text="{Binding SyncStatus}"
+											HorizontalOptions="CenterAndExpand" 
+                      VerticalOptions="CenterAndExpand"/>
+										<StackLayout 
                       Grid.Column="5"
-                      Orientation="Horizontal">
-                      <Button
+											Orientation="Horizontal">
+											<views:CustomButton 
                         Text="Edit"
-                        TextColor="{StaticResource WhiteColor}"
-                        WidthRequest="60"
-                        HeightRequest="30"
-                        Command="{Binding EditCaptureCommand}"
-                        BackgroundColor="{StaticResource GreenLightColor}"
-                        VerticalOptions="Center"
-                        HorizontalOptions="CenterAndExpand"/>
-                      <Button
+												TextColor="{StaticResource WhiteColor}"
+												WidthRequest="60"
+												HeightRequest="30"
+												Command="{Binding EditCaptureCommand}"
+												BackgroundColor="{StaticResource GreenLightColor}"
+												VerticalOptions="Center"
+												HorizontalOptions="CenterAndExpand"/>
+											<views:CustomButton 
                         Text="Delete"
-                        TextColor="{StaticResource WhiteColor}"
-                        WidthRequest="60"
-                        HeightRequest="30"
-                        Command="{Binding DeleteCaptureCommand}"
-                        BackgroundColor="{StaticResource RedColor}"
-                        VerticalOptions="Center"
-                        HorizontalOptions="CenterAndExpand"/>
-                    </StackLayout>
-                  </Grid>
-                </ViewCell>
-              </DataTemplate>
-            </ListView.ItemTemplate>
-          </ListView>
-        </StackLayout>
-        <StackLayout 
-          Orientation="Horizontal" 
-          HorizontalOptions="EndAndExpand"
-          VerticalOptions="EndAndExpand" 
-          Spacing="10" 
-          Padding="10, 30, 10, 0">
-          <Button
+												TextColor="{StaticResource WhiteColor}"
+												WidthRequest="60"
+												HeightRequest="30"
+												Command="{Binding DeleteCaptureCommand}"
+												BackgroundColor="{StaticResource RedColor}"
+												VerticalOptions="Center"
+												HorizontalOptions="CenterAndExpand"/>
+										</StackLayout>
+									</Grid>
+								</ViewCell>
+							</DataTemplate>
+						</ListView.ItemTemplate>
+					</ListView>
+				</StackLayout>
+				<StackLayout 
+          Orientation="Horizontal"
+					HorizontalOptions="EndAndExpand"
+					VerticalOptions="EndAndExpand"
+					Spacing="10"
+					Padding="10, 30, 10, 0">
+					<views:CustomButton 
             Text="Make backup"
-            Command="{Binding MakeBackUpCommand}"
-            WidthRequest="150"
-            HorizontalOptions="StartAndExpand"
-            VerticalOptions="End"
-            TextColor="{StaticResource WhiteColor}"
-            BackgroundColor="{StaticResource BlackColor}"
-            Opacity="0.85"/>
-          <Button
+						Command="{Binding MakeBackUpCommand}"
+						WidthRequest="150"
+						HorizontalOptions="StartAndExpand"
+						VerticalOptions="End"
+						TextColor="{StaticResource WhiteColor}"
+						BackgroundColor="{StaticResource BlackColor}"
+						Opacity="0.85" 
+            IsVisible = "{Binding AllowAdvancedMode}"/>
+					<views:CustomButton 
             Text="Delete"
-            WidthRequest="150"
-            HorizontalOptions="EndAndExpand"
-            VerticalOptions="End"
-            TextColor="{StaticResource WhiteColor}"
-            BackgroundColor="{StaticResource RedColor}"
-            Opacity="0.85"/>
-          <Button
+            Command="{Binding DeleteCommand}"
+						WidthRequest="150"
+						HorizontalOptions="EndAndExpand"
+						VerticalOptions="End"
+						TextColor="{StaticResource WhiteColor}"
+						BackgroundColor="{StaticResource RedColor}"
+						Opacity="0.85"/>
+					<views:CustomButton 
             Text="Sync"
+						WidthRequest="150"
+						Command="{Binding SyncCommand}"
+						HorizontalOptions="EndAndExpand"
+						VerticalOptions="End"
+						TextColor="{StaticResource WhiteColor}"
+						BackgroundColor="{StaticResource GrayColor}"
+						Opacity="0.85"/>
+					<views:CustomButton 
             WidthRequest="150"
-            Command="{Binding SyncCommand}"
-            HorizontalOptions="EndAndExpand"
-            VerticalOptions="End"
-            TextColor="{StaticResource WhiteColor}"
-            BackgroundColor="{StaticResource GrayColor}"
-            Opacity="0.85"/>
-          <Button
-            WidthRequest="150"
-            Text="Send by email"
-            Command="{Binding SyncCommand}"
-            HorizontalOptions="EndAndExpand"
-            VerticalOptions="End"
-            TextColor="{StaticResource WhiteColor}"
-            BackgroundColor="{StaticResource GrayColor}"
-            Opacity="0.85"/>
-        </StackLayout>
-      </StackLayout>
-    </Frame>
-  </StackLayout>
+						Text="Send by email"
+						Command="{Binding }"
+						HorizontalOptions="EndAndExpand"
+						VerticalOptions="End"
+						TextColor="{StaticResource WhiteColor}"
+						BackgroundColor="{StaticResource GrayColor}"
+						Opacity="0.85" 
+            IsVisible = "{Binding AllowAdvancedMode}"/>
+				</StackLayout>
+			</StackLayout>
+		</Frame>
+	</StackLayout>
 </base:XOCVPage>

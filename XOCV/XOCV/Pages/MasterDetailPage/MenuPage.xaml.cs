@@ -4,6 +4,7 @@ using XOCV.Helpers.ControlHelpers;
 using XOCV.Interfaces;
 using XOCV.Models;
 using XOCV.PageModels;
+using XOCV.Views;
 
 namespace XOCV.Pages.MasterDetailPage
 {
@@ -29,54 +30,47 @@ namespace XOCV.Pages.MasterDetailPage
 
         private void BuildMenu ()
         {
-            //menuPage.Children.Add(new Image() { Source = "Line2.png", HorizontalOptions = LayoutOptions.StartAndExpand, HeightRequest = 2, BackgroundColor = Color.White });
-            //var menuButton = ButtonHelper.SetPolButtonProperties(Content.SetOfForms[0]);
-            //menuPage.Children.Add(menuButton);
-            //menuPage.Children.Add(new Image() { Source = "Line2.png", HorizontalOptions = LayoutOptions.StartAndExpand, HeightRequest = 2, BackgroundColor = Color.White });
-			menuPage.Children.Add(new Image() { Source = "Line2.png", HorizontalOptions = LayoutOptions.StartAndExpand, HeightRequest = 2, BackgroundColor = Color.White });
+            menuPage.Children.Add (new Image () { Source = "Line2.png", HorizontalOptions = LayoutOptions.StartAndExpand, HeightRequest = 2, BackgroundColor = Color.White });
             foreach (var company in Content.ListOfCompanies)
-            { 
-                var companyButton = new Button
+            {
+                var companyButton = new CustomButton
                 {
                     Text = company.Name,
                     HorizontalOptions = LayoutOptions.Start,
                     VerticalOptions = LayoutOptions.Center,
-                    HeightRequest = 30,
-                    TextColor = Color.FromHex("0B2D90"),
+                    TextColor = Color.FromHex ("0B2D90"),
                     BackgroundColor = Color.White,
                     FontFamily = "Roboto",
                     CommandParameter = company,
                     FontSize = 20,
-                    Margin = new Thickness(10, 0, 0, 0)
+                    Margin = new Thickness (10, 0, 0, 0)
                 };
-                menuPage.Children.Add(companyButton);
-				menuPage.Children.Add(new Image() { Source = "Line2.png", HorizontalOptions = LayoutOptions.StartAndExpand, HeightRequest = 2, BackgroundColor = Color.White });
+                menuPage.Children.Add (companyButton);
+                menuPage.Children.Add (new Image () { Source = "Line2.png", HorizontalOptions = LayoutOptions.StartAndExpand, HeightRequest = 2, BackgroundColor = Color.White });
                 foreach (var program in company.ListOfPrograms)
                 {
-                    //menuPage.Children.Add(new Image() { Source = "Line2.png", HorizontalOptions = LayoutOptions.StartAndExpand, HeightRequest = 2, BackgroundColor = Color.White });
-                    var programButton = new Button
+                    var programButton = new CustomButton
                     {
                         Text = program.Name,
                         HorizontalOptions = LayoutOptions.Start,
                         VerticalOptions = LayoutOptions.Center,
-                        HeightRequest = 30,
-                        TextColor = Color.FromHex("0B2D90"),
+                        TextColor = Color.FromHex ("0B2D90"),
                         BackgroundColor = Color.White,
                         FontFamily = "Roboto",
                         CommandParameter = company,
                         FontSize = 18,
-                        Margin = new Thickness(20, 0, 0, 0)
+                        Margin = new Thickness (20, 0, 0, 0)
                     };
-                    menuPage.Children.Add(programButton);
-					menuPage.Children.Add(new Image() { Source = "Line2.png", HorizontalOptions = LayoutOptions.StartAndExpand, HeightRequest = 2, BackgroundColor = Color.White });
+                    menuPage.Children.Add (programButton);
+                    menuPage.Children.Add (new Image () { Source = "Line2.png", HorizontalOptions = LayoutOptions.StartAndExpand, HeightRequest = 2, BackgroundColor = Color.White });
                     foreach (var form in program.SetOfForms)
                     {
                         //menuPage.Children.Add(new Image() { Source = "Line2.png", HorizontalOptions = LayoutOptions.StartAndExpand, HeightRequest = 2, BackgroundColor = Color.White });
-                        var formButton = ButtonHelper.SetPolButtonProperties(form);
-						formButton.FontSize = 16;
-                        formButton.Margin = new Thickness(30, 0, 0, 0);
-                        menuPage.Children.Add(formButton);
-                        menuPage.Children.Add(new Image() { Source = "Line2.png", HorizontalOptions = LayoutOptions.StartAndExpand, HeightRequest = 2, BackgroundColor = Color.White });
+                        var formButton = ButtonHelper.SetPolButtonProperties (form);
+                        formButton.FontSize = 16;
+                        formButton.Margin = new Thickness (30, 0, 0, 0);
+                        menuPage.Children.Add (formButton);
+                        menuPage.Children.Add (new Image () { Source = "Line2.png", HorizontalOptions = LayoutOptions.StartAndExpand, HeightRequest = 2, BackgroundColor = Color.White });
                     }
                 }
             }

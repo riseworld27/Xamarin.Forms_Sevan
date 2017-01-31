@@ -1,108 +1,114 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<base:XOCVPage
+<base:XOCVPage 
   xmlns="http://xamarin.com/schemas/2014/forms"
-  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-  xmlns:base="clr-namespace:XOCV.Pages.Base;assembly=XOCV"
-  x:Class="XOCV.Pages.LoginPage">
-    <Grid>
-        <Grid
-            VerticalOptions="FillAndExpand"
-            HorizontalOptions="FillAndExpand">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="2*" />
-            </Grid.RowDefinitions>
-            <Image
-                Source="LogoSevan.png"
-                VerticalOptions="CenterAndExpand"
-                HorizontalOptions="Center"/>
-            <Frame
-                Grid.Row="1"
-                VerticalOptions="Start"
-                HorizontalOptions="Center"
-                HeightRequest="200"
-                WidthRequest="400"
-                IsVisible="{Binding isAuthorized, Converter={StaticResource InvBoolConverter}}"
-                Opacity="0.85">
-                <StackLayout
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center">
-                    <Grid
-                        RowSpacing="10"
-                        ColumnSpacing="10"
-                        Padding="20,0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Label
-                            Grid.Row="0"
-                            Grid.Column="0"
-                            Text="Login"
-                            VerticalOptions="Center" />
-                        <Entry
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            Text="{Binding Login.UserName}"
-                            Placeholder="Username or email"
-                            TextColor="{StaticResource BlackColor}"
-                            PlaceholderColor="{StaticResource GrayColor}" />
-                        <Label
-                            Grid.Row="1"
-                            Grid.Column="0"
-                            Text="Password"
-                            VerticalOptions="Center" />
-                        <Entry
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            Text="{Binding Login.Password}"
-                            Placeholder="Password"
-                            IsPassword="True"
-                            TextColor="{StaticResource BlackColor}"
-                            PlaceholderColor="{StaticResource GrayColor}" />
-                    </Grid>
-                    <Grid
-                        Padding="20,0,20,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.1*"/>
-                            <ColumnDefinition Width="0.9*"/>
-                        </Grid.ColumnDefinitions>
-                        <Image
-                            Source="{Binding IsSelectedRememberMe, Converter={StaticResource CheckBoxBoolConverter}}"
-                            HorizontalOptions="CenterAndExpand"
-                            VerticalOptions="CenterAndExpand">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer
-                                    Command="{Binding SelectCheckBoxCommand}"/>
-                            </Image.GestureRecognizers>
-                        </Image>
-                        <Label
-                            Grid.Column="1"
-                            Text="Remember me?"
-                            VerticalOptions="CenterAndExpand"
-                            VerticalTextAlignment="Center"/>
-                    </Grid>
-                    <Button
-                        Text="Sign In"
-                        TextColor="{StaticResource GreenMoreColor}"
-                        Command="{Binding LoginCommand}"
-                        FontSize="20" />
-                </StackLayout>
-            </Frame>
-        </Grid>
-        <Label
-            Grid.Row="0"
-            Text="{Binding Version}"
-            HorizontalOptions="EndAndExpand"
-            VerticalOptions="EndAndExpand">
-            <Label.GestureRecognizers>
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:base="clr-namespace:XOCV.Pages.Base;assembly=XOCV"
+	xmlns:views="clr-namespace:XOCV.Views;assembly=XOCV"
+	x:Class="XOCV.Pages.LoginPage">
+	<Grid>
+    <Grid 
+      VerticalOptions="FillAndExpand"
+			HorizontalOptions="FillAndExpand">
+      <Grid.RowDefinitions>
+				<RowDefinition Height="*" />
+				<RowDefinition Height="2*" />
+			</Grid.RowDefinitions>
+			<Image 
+        Source="LogoSevan.png"
+				VerticalOptions="CenterAndExpand"
+				HorizontalOptions="Center" />
+			<Frame 
+        Grid.Row="1"
+				VerticalOptions="Start"
+				HorizontalOptions="Center"
+				HeightRequest="200"
+				WidthRequest="400"
+				BackgroundColor="White"
+				OutlineColor="Silver"
+				IsVisible="{Binding isAuthorized, Converter={StaticResource InvBoolConverter}}"
+				Opacity="0.85">
+				<StackLayout 
+          HorizontalOptions="Center"
+					VerticalOptions="Center">
+					<Grid 
+            RowSpacing="10"
+						ColumnSpacing="10"
+						Padding="20,0">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*" />
+							<RowDefinition Height="*" />
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
+						<views:CustomLabel 
+              Grid.Row="0"
+							Grid.Column="0"
+							Text="Login"
+							VerticalOptions="Center" />
+						<views:CustomEntry 
+              Grid.Row="0"
+							Grid.Column="1"
+							Text="{Binding Login.UserName}"
+							Placeholder="Username or email"
+							TextColor="{StaticResource BlackColor}"
+							PlaceholderColor="{StaticResource GrayColor}"
+							FontSize="15" />
+						<views:CustomLabel 
+              Grid.Row="1"
+							Grid.Column="0"
+							Text="Password"
+							VerticalOptions="Center" />
+						<views:CustomEntry 
+              Grid.Row="1"
+							Grid.Column="1"
+							Text="{Binding Login.Password}"
+							Placeholder="Password"
+							IsPassword="True"
+							TextColor="{StaticResource BlackColor}"
+							PlaceholderColor="{StaticResource GrayColor}"
+							FontSize="15" />
+					</Grid>
+					<Grid 
+            Padding="20,0,20,0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="0.1*" />
+							<ColumnDefinition Width="0.9*" />
+						</Grid.ColumnDefinitions>
+						<Image 
+              Source="{Binding IsSelectedRememberMe, Converter={StaticResource CheckBoxBoolConverter}}"
+							HorizontalOptions="CenterAndExpand"
+							VerticalOptions="CenterAndExpand">
+							<Image.GestureRecognizers>
                 <TapGestureRecognizer 
-                    Command="{Binding OpenVersionDescriptionCommand}"/>
-            </Label.GestureRecognizers>
-        </Label>
-    </Grid>
+                  Command="{Binding SelectCheckBoxCommand}" />
+							</Image.GestureRecognizers>
+						</Image>
+						<views:CustomLabel 
+              Grid.Column="1"
+							Text="Remember me?"
+							VerticalOptions="CenterAndExpand"
+							VerticalTextAlignment="Center" />
+					</Grid>
+					<views:CustomButton 
+            Text="Sign In"
+						TextColor="{StaticResource GreenMoreColor}"
+						BackgroundColor="Transparent"
+						Command="{Binding LoginCommand}"
+						FontSize="20" />
+				</StackLayout>
+			</Frame>
+		</Grid>
+		<views:CustomLabel 
+      Grid.Row="0"
+			Text="{Binding Version}"
+			HorizontalOptions="EndAndExpand"
+			VerticalOptions="EndAndExpand">
+			<views:CustomLabel.GestureRecognizers>
+				<TapGestureRecognizer 
+          Command="{Binding OpenVersionDescriptionCommand}" />
+			</views:CustomLabel.GestureRecognizers>
+		</views:CustomLabel>
+	</Grid>
 </base:XOCVPage>

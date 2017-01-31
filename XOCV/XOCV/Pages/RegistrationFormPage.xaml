@@ -1,151 +1,156 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <base:XOCVPage 
   xmlns="http://xamarin.com/schemas/2014/forms"
-  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-  xmlns:base="clr-namespace:XOCV.Pages.Base;assembly=XOCV"
-  x:Class="XOCV.Pages.RegistrationFormPage">
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:base="clr-namespace:XOCV.Pages.Base;assembly=XOCV"
+	xmlns:views="clr-namespace:XOCV.Views;assembly=XOCV"
+	x:Class="XOCV.Pages.RegistrationFormPage">
 	<ScrollView>
-  <StackLayout
-    Padding="30,60,30,60"
-    Spacing="10">
-    <Grid>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="0.25*"/>
-        <ColumnDefinition Width="0.75*"/>
-      </Grid.ColumnDefinitions>
-      <Label 
-        Text="Surveyor name: "/>
-			<Label Grid.Column="1" Text="{Binding Surveyor}"/>
-    </Grid>
-    <Grid>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="0.25*"/>
-        <ColumnDefinition Width="0.75*"/>
-      </Grid.ColumnDefinitions>
-      <Label
-        Text="Email: "/>
-      <Label
-        Grid.Column="1"
-        x:Name="emailLabel"/>
-    </Grid>
-    <Grid>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="0.25*"/>
-        <ColumnDefinition Width="0.75*"/>
-      </Grid.ColumnDefinitions>
-      <Label 
-        Text="Date of Survey: "/>
-      <DatePicker 
-        Grid.Column="1"
+		<StackLayout 
+      Padding="30,60,30,60"
+			Spacing="10">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="0.25*"/>
+					<ColumnDefinition Width="0.75*"/>
+				</Grid.ColumnDefinitions>
+				<views:CustomLabel 
+          Text="Surveyor name: "/>
+				<views:CustomLabel 
+          Grid.Column="1"
+					Text="{Binding Surveyor}"/>
+			</Grid>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="0.25*"/>
+					<ColumnDefinition Width="0.75*"/>
+				</Grid.ColumnDefinitions>
+				<views:CustomLabel 
+          Text="Email: "/>
+				<views:CustomLabel 
+          Grid.Column="1"
+					x:Name="emailLabel"/>
+			</Grid>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="0.25*"/>
+					<ColumnDefinition Width="0.75*"/>
+				</Grid.ColumnDefinitions>
+				<views:CustomLabel 
+          Text="Date of Survey: "/>
+				<DatePicker 
+          Grid.Column="1"
 					Format="MM/dd/yyyy"
-        BackgroundColor="White"
-        TextColor="Black"/>
-    </Grid>
-    <Grid>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="0.25*"/>
-        <ColumnDefinition Width="0.75*"/>
-      </Grid.ColumnDefinitions>
-      <Grid.RowDefinitions>
-        <RowDefinition Height="30"></RowDefinition>
-        <RowDefinition Height="200"></RowDefinition>
-      </Grid.RowDefinitions>
-      <Label 
-        Text="Store Numbers: "/>
-      <SearchBar 
-        Grid.Column="1"
-        Grid.Row="0"
-        x:Name = "searchBar"
-        TextColor="{StaticResource BlackColor}"
-        BackgroundColor="{StaticResource WhiteColor}"
-				SearchCommand="{Binding SearchStoreCommand}"
-        Text="{Binding SearchStore}"/>
-        <ListView 
-          x:Name = "storeNumList" 
-          IsVisible="{Binding IsListOfStoreNumber}"
-          Grid.Row="1" Grid.Column="1"
-          ItemsSource="{Binding RezStoreNumberModels}"
-          SelectedItem="{Binding SelectStoreNumber}">
-          <ListView.ItemTemplate>
-            <DataTemplate>
-              <ViewCell>
-                <StackLayout 
+					BackgroundColor="White"
+					TextColor="Black"/>
+			</Grid>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="0.25*"/>
+					<ColumnDefinition Width="0.75*"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="30"/>
+					<RowDefinition Height="200"/>
+				</Grid.RowDefinitions>
+				<views:CustomLabel 
+          Text="Store Numbers: "/>
+				<SearchBar 
+          Grid.Column="1"
+					Grid.Row="0"
+					x:Name="searchBar"
+					TextColor="{StaticResource BlackColor}"
+					BackgroundColor="{StaticResource WhiteColor}"
+					SearchCommand="{Binding SearchStoreCommand}"
+					Text="{Binding SearchStore}" />
+				<ListView 
+          x:Name="storeNumList"
+					BackgroundColor="{StaticResource WhiteColor}"
+					IsVisible="{Binding IsListOfStoreNumber}"
+					Grid.Row="1"
+					Grid.Column="1"
+					ItemsSource="{Binding RezStoreNumberModels}"
+					SelectedItem="{Binding SelectStoreNumber}">
+					<ListView.ItemTemplate>
+						<DataTemplate>
+							<ViewCell>
+								<StackLayout 
                   Padding="20,0,0,0">
-                  <Label 
-                    Text="{Binding StoreNumber}" 
-                    HorizontalOptions="Start" 
-                    VerticalOptions="CenterAndExpand" />
-                </StackLayout>
-              </ViewCell>
-            </DataTemplate>
-          </ListView.ItemTemplate>
-        </ListView>
-    </Grid>
-    <Grid>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="0.25*"/>
-        <ColumnDefinition Width="0.75*"/>
-      </Grid.ColumnDefinitions>
-      <Label 
-        Text="Store Number: "/>
-      <Label 
-        Grid.Column="1"
-        Text="{Binding StoreNumber.StoreNumber}"/>
-    </Grid>
-		<Grid>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="0.25*"/>
-        <ColumnDefinition Width="0.75*"/>
-      </Grid.ColumnDefinitions>
-      <Label 
-        Text="Address: "/>
-      <Label
-        Grid.Column="1"
-        Text="{Binding StoreNumber.Address}"/>
-    </Grid>
-    <Grid>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="0.25*"/>
-        <ColumnDefinition Width="0.75*"/>
-      </Grid.ColumnDefinitions>
-      <Label 
-        Text="City: "/>
-      <Label 
-        Grid.Column="1"
-        Text="{Binding StoreNumber.City}"/>
-    </Grid>
-    <Grid>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="0.25*"/>
-        <ColumnDefinition Width="0.75*"/>
-      </Grid.ColumnDefinitions>
-      <Label 
-        Text="State: "/>
-      <Label 
-        Grid.Column="1"
-        Text="{Binding StoreNumber.State}"/>
-    </Grid>
-    <Grid>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="0.25*"/>
-        <ColumnDefinition Width="0.75*"/>
-      </Grid.ColumnDefinitions>
-      <Label 
-        Text="Zip: "/>
-      <Label
-        Grid.Column="1"
-        Text="{Binding StoreNumber.Zip}"/>
-    </Grid>
-    <Button 
-      Text="NEXT"
-      Command="{Binding OpenNewCaptureCommand}"
-      Margin="0,20,0,0"
-      BackgroundColor="{StaticResource BlackColor}"
-      TextColor="{StaticResource WhiteColor}"
-      HorizontalOptions="End"
-      WidthRequest="100"
-      VerticalOptions="End"
-      Opacity="0.85"/>
-  </StackLayout>
-		</ScrollView>
+									<views:CustomLabel 
+                    Text="{Binding StoreNumber}"
+										HorizontalOptions="Start"
+										VerticalOptions="CenterAndExpand" />
+								</StackLayout>
+							</ViewCell>
+						</DataTemplate>
+					</ListView.ItemTemplate>
+				</ListView>
+			</Grid>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="0.25*"/>
+					<ColumnDefinition Width="0.75*"/>
+				</Grid.ColumnDefinitions>
+				<views:CustomLabel 
+          Text="Store Number: "/>
+				<views:CustomLabel 
+          Grid.Column="1"
+					Text="{Binding StoreNumber.StoreNumber}"/>
+			</Grid>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="0.25*"/>
+					<ColumnDefinition Width="0.75*"/>
+				</Grid.ColumnDefinitions>
+				<views:CustomLabel 
+          Text="Address: "/>
+				<views:CustomLabel 
+          Grid.Column="1"
+					Text="{Binding StoreNumber.Address}"/>
+			</Grid>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="0.25*"/>
+					<ColumnDefinition Width="0.75*"/>
+				</Grid.ColumnDefinitions>
+				<views:CustomLabel
+          Text="City: "/>
+				<views:CustomLabel 
+          Grid.Column="1"
+					Text="{Binding StoreNumber.City}"/>
+			</Grid>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="0.25*"/>
+					<ColumnDefinition Width="0.75*"/>
+				</Grid.ColumnDefinitions>
+				<views:CustomLabel 
+          Text="State: "/>
+				<views:CustomLabel 
+          Grid.Column="1"
+					Text="{Binding StoreNumber.State}"/>
+			</Grid>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="0.25*"/>
+					<ColumnDefinition Width="0.75*"/>
+				</Grid.ColumnDefinitions>
+				<views:CustomLabel 
+          Text="Zip: "/>
+				<views:CustomLabel 
+          Grid.Column="1"
+					Text="{Binding StoreNumber.Zip}"/>
+			</Grid>
+			<Button 
+        Text="NEXT"
+				Command="{Binding OpenNewCaptureCommand}"
+				Margin="0,20,0,0"
+				BackgroundColor="{StaticResource BlackColor}"
+				TextColor="{StaticResource WhiteColor}"
+				HorizontalOptions="End"
+				WidthRequest="100"
+				VerticalOptions="End"
+				Opacity="0.85"/>
+		</StackLayout>
+	</ScrollView>
 </base:XOCVPage>

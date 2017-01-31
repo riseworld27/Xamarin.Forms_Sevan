@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace XOCV.iOS.Services
     {
         private Sftp Client { get; }
         private string DocumentsDirectory { get; }
+		public string TempBackUpFolderName { get; set; }
 
         // Connection
         private readonly string ServerName = "50.112.202.60";
@@ -91,7 +93,10 @@ namespace XOCV.iOS.Services
  
             try
             {
-                var fileName = "BackupLocalDataBase_" + DateTime.Now.ToString("dd-MM-yyyy-hh-mm-ss") + ".json";
+                var fileName = "BackupLocalDataBase_" + DateTime.Now.ToString("dd-MM-yyyy-hh-mm-ss");
+
+				TempBackUpFolderName = fileName;
+
                 var dirpath = string.Format("/home/sevan-img.pilgrimconsulting.com/backups/{0}", fileName);
  
                 if (!Client.DirectoryExists(dirpath))
@@ -105,7 +110,7 @@ namespace XOCV.iOS.Services
  
                 var fileStream = new FileStream(jsonFilename, FileMode.Open, FileAccess.Read);
  
-                var result = Client.UploadFile(fileStream, dirpath + "/" + fileName);
+                var result = Client.UploadFile(fileStream, dirpath + "/" + fileName + ".json");
                 fileStream.Flush();
                 fileStream.Close();
  
@@ -122,5 +127,49 @@ namespace XOCV.iOS.Services
  
              return success;
          }
+
+		public async Task<bool> BackUpImages(List<string> imageNames)
+		{
+			if (imageNames.Count == 0)
+				return false;
+			bool success = true;
+
+			// Connect to the SFTP server.
+			Client.Connect("50.112.202.60", 22);
+
+			// Authenticate.
+			Client.Authenticate("sevan-img.pilgrimconsulting.com", "8A$sevan");
+
+			foreach (string name in imageNames)
+			{
+				try
+				{
+					string storNum = name.Split('_')[0];
+					var dirpath = string.Format("/home/sevan-img.pilgrimconsulting.com/backups/{0}", TempBackUpFolderName);
+					if (!Client.DirectoryExists(dirpath))
+					{
+						Client.CreateDirectory(dirpath);
+					}
+
+					string jpgFilename = Path.Combine(DocumentsDirectory, name);
+					var fileStream = new FileStream(jpgFilename, FileMode.Open, FileAccess.Read);
+
+					var r = Client.UploadFile(fileStream, dirpath + "/" + name);
+					fileStream.Flush();
+					fileStream.Close();
+
+					if (r == 0)
+					{
+						success = false;
+					}
+				}
+				catch (Exception ex)
+				{
+					var exMes = ex.Message;
+				}
+			}
+			Client.Disconnect();
+			return success;
+		}
     }
 }

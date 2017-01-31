@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
@@ -17,16 +18,17 @@ namespace XOCV.iOS.Services
 {
     public class PictureService : IPictureService
     {
-		//Todo: set proper value
-		public static int RESIZE_LIMIT = 500;
-		public static int RESIZE_RATIO = 5;
-			
-        Sftp client;
-        string documentsDirectory;
+        //Todo: set proper value
+        public static int RESIZE_LIMIT = 2000;
+        public static int RESIZE_RATIO = 3;
+
+        private readonly Sftp client;
+        private readonly string documentsDirectory;
 
         public static PollPageRenderer renderer;
 		public static EditImageRenderer EditImageRendererInstance;
 		public static SketchImageRenderer SketchImageRendererInstance;
+
         public PictureService ()
         {
             client = new Sftp ();
@@ -55,8 +57,10 @@ namespace XOCV.iOS.Services
             string jpgFilename = Path.Combine (documentsDirectory, imageName);
             FileStream fileStream = new FileStream (jpgFilename, FileMode.Open, FileAccess.Read);
             byte [] buffer = new byte [fileStream.Length];
+
             fileStream.Read (buffer, 0, (int)fileStream.Length);
             fileStream.Close ();
+
             return buffer;
         }
 
@@ -71,74 +75,90 @@ namespace XOCV.iOS.Services
 
         public async Task SavePictureToDisk (ImageSource imgSrc, string fileName)
         {
-            var renderer = new StreamImagesourceHandler ();
-            var photo = await renderer.LoadImageAsync (imgSrc);
-
-			if (photo.Size.Width > RESIZE_LIMIT || photo.Size.Height > RESIZE_LIMIT)
-			{
-				var smallImage = GetSmallImage(photo);
-				photo.Dispose();
-				photo = smallImage;
-			}
-            string jpgFilename = Path.Combine (documentsDirectory, fileName + ".jpg");
-            NSData imgData = photo.AsJPEG ();
-
-            NSError err = null;
-            if (imgData.Save (jpgFilename, false, out err))
+            try
             {
-                Console.WriteLine ("saved as " + jpgFilename);
+                var renderer = new StreamImagesourceHandler();
+                var photo = await renderer.LoadImageAsync(imgSrc);
+
+                if (photo.Size.Width > RESIZE_LIMIT && photo.Size.Height > RESIZE_LIMIT)
+                {
+                    var smallImage = GetSmallImage(photo);
+                    photo.Dispose();
+                    photo = smallImage;
+                }
+                string jpgFilename = Path.Combine(documentsDirectory, fileName + ".jpg");
+                NSData imgData = photo.AsJPEG();
+
+                NSError err = null;
+                if (imgData.Save(jpgFilename, false, out err))
+                {
+                    Console.WriteLine("saved as " + jpgFilename);
+                }
+                else
+                {
+                    Console.WriteLine("NOT saved as " + jpgFilename + " because" + err.LocalizedDescription);
+                }
+
+                photo.Dispose();
+
+                imgData.Dispose();
             }
-            else
+            catch (Exception ex)
             {
-                Console.WriteLine ("NOT saved as " + jpgFilename + " because" + err.LocalizedDescription);
+                string message = ex.Message;
+                Debug.WriteLine("Error occurs: {0}", message);
+                throw;
             }
-
-			photo.Dispose();
-
-			imgData.Dispose();
         }
 
 		public async Task<string> SaveImageToDisk(string imgSrc, string fileName)
 		{
-			//var renderer = new ImageLoaderSourceHandler();
-			UIImage photo = null;
-			using (var url = new NSUrl(imgSrc))
-			{
-				using (var data = NSData.FromUrl(url))
-				{
-					photo = UIImage.LoadFromData(data);
-				}
-			}
+		    try
+		    {
+                UIImage photo = null;
+                using (var url = new NSUrl(imgSrc))
+                {
+                    using (var data = NSData.FromUrl(url))
+                    {
+                        photo = UIImage.LoadFromData(data);
+                    }
+                }
 
-			if (photo.Size.Width > RESIZE_LIMIT || photo.Size.Height > RESIZE_LIMIT)
-			{
-				var smallImage = GetSmallImage(photo);
-				photo.Dispose();
-				photo = smallImage;
-			}
-			string jpgFilename = Path.Combine(documentsDirectory, fileName);
-			NSData imgData = photo.AsJPEG();
+                if (photo.Size.Width > RESIZE_LIMIT && photo.Size.Height > RESIZE_LIMIT)
+                {
+                    var smallImage = GetSmallImage(photo);
+                    photo.Dispose();
+                    photo = smallImage;
+                }
+                string jpgFilename = Path.Combine(documentsDirectory, fileName);
+                NSData imgData = photo.AsJPEG();
 
-			NSError err = null;
-			if (imgData.Save(jpgFilename, false, out err))
-			{
-				Console.WriteLine("saved as " + jpgFilename);
-			}
-			else
-			{
-				Console.WriteLine("NOT saved as " + jpgFilename + " because" + err.LocalizedDescription);
-			}
+                NSError err = null;
+                if (imgData.Save(jpgFilename, false, out err))
+                {
+                    Console.WriteLine("saved as " + jpgFilename);
+                }
+                else
+                {
+                    Console.WriteLine("NOT saved as " + jpgFilename + " because" + err.LocalizedDescription);
+                }
 
-			photo.Dispose();
+                photo.Dispose();
 
-			imgData.Dispose();
+                imgData.Dispose();
 
-			return jpgFilename;
+                return jpgFilename;
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                Debug.WriteLine("Error occurs: {0}", message);
+		        throw;
+		    }
 		}
 
 		public static void SavePictureToDisk(UIImage imgSrc, string fileName)
 		{
-			var documentsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 			NSData imgData = imgSrc.AsJPEG();
 			NSError err = null;
 			if (imgData.Save(fileName, false, out err))
@@ -194,17 +214,20 @@ namespace XOCV.iOS.Services
 
         private UIImage GetSmallImage (UIImage source)
         {
-			nfloat width = source.Size.Width / RESIZE_RATIO;
-			nfloat height = source.Size.Height / RESIZE_RATIO;
+            nfloat width = source.Size.Width / RESIZE_RATIO;
+            nfloat height = source.Size.Height / RESIZE_RATIO;
+
             UIGraphics.BeginImageContext (new SizeF ((int)width, (int)height));
             source.Draw (new RectangleF (0, 0, (int)width, (int)height));
+
             var resultImage = UIGraphics.GetImageFromCurrentImageContext ();
-            UIGraphics.EndImageContext (); return resultImage;
+            UIGraphics.EndImageContext ();
+
+            return resultImage;
         }
 
 		public static byte[] ImageToByteArray(UIImage image)
 		{
-
 			if (image == null)
 			{
 				return null;
@@ -265,8 +288,8 @@ namespace XOCV.iOS.Services
                     fileStream.Flush ();
                     fileStream.Close ();
 
-                    //client.UploadFile (name + ".jpg",);
-                    if (r == 0) {
+                    if (r == 0)
+                    {
                         success = false;
                     }
                 }

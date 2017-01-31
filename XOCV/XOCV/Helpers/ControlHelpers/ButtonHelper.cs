@@ -1,19 +1,19 @@
 ﻿using Xamarin.Forms;
 using XOCV.Helpers.ControlHelpers.Base;
 using XOCV.Models.ResponseModels;
+using XOCV.Views;
 
 namespace XOCV.Helpers.ControlHelpers
 {
     public class ButtonHelper : BaseControlHelper
     {
-        public static Button SetPolButtonProperties (ComplexFormsModel model)
+        public static CustomButton SetPolButtonProperties (ComplexFormsModel model)
         {
-            Button button = new Button ();
+            CustomButton button = new CustomButton ();
 
             button.Text = model.FormsTitle;
             button.HorizontalOptions = LayoutOptions.Start;
             button.VerticalOptions = LayoutOptions.Center;
-            button.HeightRequest = 30;
             button.TextColor = Color.FromHex ("0B2D90");
             button.BackgroundColor = Color.White;
             button.FontFamily = "Roboto";

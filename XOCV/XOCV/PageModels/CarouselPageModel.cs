@@ -1,18 +1,13 @@
-﻿using System;
-using System.IO;
-using System.Threading;
-using System.Windows.Input;
-using FreshMvvm;
+﻿using System.Windows.Input;
 using PropertyChanged;
 using Xamarin.Forms;
-using System.Threading.Tasks;
-using XOCV.Models.ResponseModels;
 using XOCV.Interfaces;
+using XOCV.PageModels.Base;
 
 namespace XOCV.PageModels
 {
 	[ImplementPropertyChanged]
-	public class CarouselPageModel : FreshBasePageModel
+	public class CarouselPageModel : BasePageModel
 	{
 		public ImageSource ImageSource { get; set; }
 		public string Image { get; set; }

@@ -1,6 +1,4 @@
-﻿using System;
-using XOCV.Models.ResponseModels;
-using XOCV.ViewModels.Base;
+﻿using XOCV.PageModels.Base;
 
 namespace XOCV.PageModels
 {

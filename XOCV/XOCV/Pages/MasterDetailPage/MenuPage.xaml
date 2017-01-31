@@ -1,72 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:pageModels="clr-namespace:XOCV.PageModels;assembly=XOCV"
-    x:Class="XOCV.Pages.MasterDetailPage.MenuPage"
-    Title="Menu"
-    BackgroundColor="{StaticResource WhiteColor}">
-    <ContentPage.BindingContext>
-        <pageModels:MenuPageModel />
-    </ContentPage.BindingContext>
-    <StackLayout>
-        <Grid>
+  xmlns="http://xamarin.com/schemas/2014/forms"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:pageModels="clr-namespace:XOCV.PageModels;assembly=XOCV"
+  x:Class="XOCV.Pages.MasterDetailPage.MenuPage"
+  Title="Menu"
+  BackgroundColor="{StaticResource WhiteColor}">
+  <ContentPage.BindingContext>
+    <pageModels:MenuPageModel />
+  </ContentPage.BindingContext>
+  <StackLayout>
+    <Grid>
+      <StackLayout
+        Padding="0,20,0,0"
+        BackgroundColor="{StaticResource WhiteColor}" />
+      <StackLayout
+        BackgroundColor="{StaticResource WhiteColor}"
+        Padding="40,20,50,20"
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand">
+        <Image
+          Source="LogoSevan.png"
+          HorizontalOptions="StartAndExpand" />
+        <BoxView
+          HeightRequest="30"
+          BackgroundColor="Transparent" />
+        <ScrollView
+          BackgroundColor="White"
+          IsVisible="{Binding IsAuthorized}"
+					IsClippedToBounds="true"
+          HorizontalOptions="FillAndExpand"
+          VerticalOptions="FillAndExpand">
+          <Image
+            Source="Line2.png"
+            HeightRequest="10"
+            HorizontalOptions="StartAndExpand"
+            BackgroundColor="{StaticResource WhiteColor}" />
+          <StackLayout
+            Opacity="0.85"
+            Padding="0"
+            BackgroundColor="Transparent">
             <StackLayout
-                Padding="0,20,0,0"
-                BackgroundColor="{StaticResource WhiteColor}" />
-            <StackLayout
-                BackgroundColor="{StaticResource WhiteColor}"
-                Padding="40,20,50,20"
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand">
-                <Image
-                    Source="LogoSevan.png"
-                    HorizontalOptions="StartAndExpand" />
-                <BoxView
-                    HeightRequest="30"
-                    BackgroundColor="Transparent" />
-                <ScrollView
-                    BackgroundColor="White"
-                    IsVisible="{Binding IsAuthorized}"
-                    HorizontalOptions="FillAndExpand"
-                    VerticalOptions="FillAndExpand">
-                    <Image
-                        Source="Line2.png"
-                        HeightRequest="10"
-                        HorizontalOptions="StartAndExpand"
-                        BackgroundColor="{StaticResource WhiteColor}" />
-                    <StackLayout
-                        Opacity="0.85"
-                        Padding="0"
-                        BackgroundColor="Transparent">
-                        <StackLayout
-                            Padding="0"
-                            x:Name="menuPage"
-                            BackgroundColor="{StaticResource WhiteColor}" />
-                    </StackLayout>
-                </ScrollView>
-            </StackLayout>
-            <BoxView
-                BackgroundColor="{StaticResource GreenMoreColor}"
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="Start"
-                HeightRequest="15"/>
-            <BoxView
-                BackgroundColor="{StaticResource GreenMoreColor}"
-                HorizontalOptions="End"
-                VerticalOptions="FillAndExpand"
-                WidthRequest="3" />
-        </Grid>
-        <!--<Button
-            Text="Logout"
-            Command="{Binding LogoutCommand}"
-            HorizontalOptions="CenterAndExpand"
-            VerticalOptions="EndAndExpand"
-            HeightRequest="30"
-            TextColor="Red"
-            BackgroundColor="White"
-            FontFamily = "Roboto"
-            FontSize="22"
-            Margin="20"/>-->
-    </StackLayout>
+              Padding="0"
+              x:Name="menuPage"
+              BackgroundColor="{StaticResource WhiteColor}" />
+          </StackLayout>
+        </ScrollView>
+      </StackLayout>
+      <BoxView
+        BackgroundColor="{StaticResource GreenMoreColor}"
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="Start"
+        HeightRequest="15"/>
+      <BoxView
+        BackgroundColor="{StaticResource GreenMoreColor}"
+        HorizontalOptions="End"
+        VerticalOptions="FillAndExpand"
+        WidthRequest="3" />
+    </Grid>
+  </StackLayout>
 </ContentPage>

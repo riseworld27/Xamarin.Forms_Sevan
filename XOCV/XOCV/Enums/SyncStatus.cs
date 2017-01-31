@@ -2,7 +2,7 @@
 {
     public enum SyncStatus
     {
-        Sync,
-        NotSync
+        NotSync,
+        Sync
     }
 }

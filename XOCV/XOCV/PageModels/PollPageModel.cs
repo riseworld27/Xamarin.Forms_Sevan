@@ -7,12 +7,10 @@ using System.Windows.Input;
 using Acr.UserDialogs;
 using PropertyChanged;
 using Xamarin.Forms;
-using XOCV.Helpers;
 using XOCV.Interfaces;
 using XOCV.Models;
 using XOCV.Models.ResponseModels;
-using XOCV.ViewModels.Base;
-using System.IO;
+using XOCV.PageModels.Base;
 using XOCV.Enums;
 using Newtonsoft.Json;
 using System.Diagnostics;
@@ -41,7 +39,10 @@ namespace XOCV.PageModels
 		public ObservableCollection<ObservableCollection<ComplexItemPhotosModel>> PollPictures { get; set; }
 		public ObservableCollection<string> CurrentImageSources { get; set; }
 		public string Status { get; set; }
-		public DBModel DbModel { get; set; }
+		//public DBModel DbModel { get; set; }
+		public int DbModelId { get; set; }
+		public long FormID { get; set; }
+		public string StoreNumber { get; set; }
 		public bool needsToUpdatePhotos { get; set; }
 		public int[] CurrentCarouselPosition { get; set; }
         public int CurrentTimeOnTheForm { get; set; }
@@ -66,19 +67,18 @@ namespace XOCV.PageModels
 			{
 				UserDialog.ShowLoading();
 
+				var DbModel = new DBModel { ID = DbModelId, FormID = FormID, StoreNumber = StoreNumber };
+				ComplexForms.Captures.First().Date = DateTime.UtcNow;
+				DbModel.Content = JsonConvert.SerializeObject(ComplexForms);
+				DbModel.Date = ComplexForms.Captures.FirstOrDefault().Date;
+				new Task(() => App.DataBase.SaveContent(DbModel)).Start();
+
 				if (IsLastCapture && _currentCapturePosition < value)
 				{
-					ComplexForms.Captures.First().Date = DateTime.UtcNow;
-					DbModel.Content = JsonConvert.SerializeObject(ComplexForms);
-					DbModel.Date = ComplexForms.Captures.FirstOrDefault().Date;
-					new Task(() => App.DataBase.SaveContent(DbModel)).Start();
 					CoreMethods.PushPageModel<FormDetailsPageModel>(App.DataBase.GetContent().FirstOrDefault());
 				}
 				else
 				{
-					DbModel.Content = JsonConvert.SerializeObject(ComplexForms);
-					DbModel.FormStatus = FormStatus.Complete;
-					DbModel.Date = ComplexForms.Captures.FirstOrDefault().Date;
 					IsFirstCapture = false;
 					IsLastCapture = false;
 					if (value == 0)
@@ -148,6 +148,7 @@ namespace XOCV.PageModels
 		public ICommand GoToNextCaptureCommand => new Command(GoToNextCaptureCommandExecute);
 		public ICommand GoToPrevCaptureCommand => new Command(GoToPrevCaptureCommandExecute);
 		public ICommand GoToCaptureCommand => new Command<int>(async (index) => await GoToCaptureCommandExecute(index));
+		public ICommand TakePictureCommand => new Command<int []>(async (args) => await TakePictureCommandExecute(args[0], args[1], args [2]));
 		#endregion
 
 		#region Constructors
@@ -167,7 +168,10 @@ namespace XOCV.PageModels
 		{
 			CurrentCarouselPosition = new int[3];
 			CurrentImageSources = new ObservableCollection<string>();
-			DbModel = initData as DBModel;
+			var DbModel = initData as DBModel;
+			DbModelId = DbModel.ID;
+			FormID = DbModel.FormID;
+			StoreNumber = DbModel.StoreNumber;
 			if (DbModel != null)
 			{
 				ComplexForms = JsonConvert.DeserializeObject<ComplexFormsModel>(DbModel.Content);
@@ -252,6 +256,7 @@ namespace XOCV.PageModels
 		#region Command execution
 		private async Task ExitCommandExecute()
 		{
+			var DbModel = new DBModel { ID = DbModelId, FormID = FormID, StoreNumber = StoreNumber };
 			try
 			{
 				foreach (var capture in ComplexForms.Captures)
@@ -276,6 +281,7 @@ namespace XOCV.PageModels
 		{
 			try
 			{
+				var DbModel = new DBModel { ID = DbModelId, FormID = FormID, StoreNumber = StoreNumber };
 				foreach (var capture in ComplexForms.Captures)
 				{
 					capture.SyncStatus = SyncStatus.NotSync;
@@ -367,12 +373,10 @@ namespace XOCV.PageModels
 			var itemImageModels = BuildModel.MultiComplexItems[id].ComplexItems[subId].ItemImageModels[carouselId];
 			string [] path = { BuildModel.StoreNumber, 
 				BuildModel.MultiComplexItems[id].ComplexItems[0].ComplexItemID.ToString(), 
-				BuildModel.MultiComplexItems[id].ComplexItems[0].Items.FirstOrDefault(i => i.Name == "imageKey").ItemId.ToString()};
+				BuildModel.MultiComplexItems[id].ComplexItems[0].Items.Where(i => i.Name == "imageKey").ToList()[carouselId].ItemId.ToString()};
 			object[] args = { images, itemImageModels ,path };
 			CoreMethods.PushPageModel<GalleryPageModel>(args);
 		}
-
-		//! new code
 
 		void RefreshPhotoSections()
 		{
@@ -390,32 +394,7 @@ namespace XOCV.PageModels
 		protected override void ViewIsAppearing(object sender, EventArgs e)
 		{
 			base.ViewIsAppearing(sender, e);
-			PollPictures = null;
-			PollPictures = new ObservableCollection<ObservableCollection<ComplexItemPhotosModel>>();
-			for (int i = 0; i < BuildModel.MultiComplexItems.Count; i++)
-			{
-				var listOfImageSources = new ObservableCollection<ComplexItemPhotosModel>();
-				for (int j = 0; j < BuildModel.MultiComplexItems[i].ComplexItems.Count; j++)
-				{
-
-					var ciom = new ComplexItemPhotosModel();
-					if (BuildModel.MultiComplexItems[i].ComplexItems[j].ItemImageModels.Count != 0)
-					{
-						var imageCollections = new List<int>();
-						if (BuildModel.MultiComplexItems[i].ComplexItems[j].Items.Where(it => it.Name == "imageKey").Count() != 0)
-						{
-							foreach (var collection in BuildModel.MultiComplexItems[i].ComplexItems[j].Items.Where(it => it.Name == "imageKey"))
-							{
-								imageCollections.Add(collection.Images.Count);
-							}
-						}
-						ciom.Pictures = imageCollections;
-					}
-					listOfImageSources.Add(ciom);
-				}
-				PollPictures.Add(listOfImageSources);
-			}
-			MessagingCenter.Send<PollPageModel>(this, "onImageInteracted");
+			UpdatePhotos();
 		}
 
 	    private void BackgroundTimer(bool isTimerWorking = true)
@@ -427,5 +406,123 @@ namespace XOCV.PageModels
             });
         }
         #endregion
+
+		private async Task<MediaFile> TakePictureCommandExecute(int id, int subId, int carouselId)
+		{
+			try
+			{
+				return await CameraProvider.TakePhotoAsync(new Helpers.CameraMediaStorageOptions
+				{
+					DefaultCamera = Helpers.CameraDevice.Rear,
+					MaxPixelDimension = 400
+				}).ContinueWith(
+					t =>
+					{
+					    try
+					    {
+                            if (t.IsFaulted)
+                            {
+                                Status = t.Exception.InnerException.ToString();
+                                UserDialog.AlertAsync("Taking photo failed!", "Warning!", "Ok");
+                            }
+                            else if (t.IsCanceled)
+                            {
+                                Status = "Canceled";
+                            }
+                            else
+                            {
+                                var mediaFile = t.Result;
+                                SavePhoto(mediaFile, id, subId, carouselId).Wait();
+                                GC.Collect();
+                                return mediaFile;
+                            }
+                        }
+					    catch (Exception ex)
+					    {
+                            Debug.WriteLine(ex.Message);
+                            UserDialog.Alert("Taking photo failed!", "Warning!", "Ok");
+                            return null;
+                        }
+
+						return null;
+					});
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex.Message);
+				await UserDialog.AlertAsync("Taking photo failed!", "Warning!", "Ok");
+				return null;
+			}
+		}
+
+		public async Task SavePhoto(MediaFile mediaFile, int id, int subId, int carouselId)
+		{
+			try
+			{
+				string fileName = string.Format("{0}_{1}_{2}_{3}",
+					BuildModel.StoreNumber,
+					BuildModel.MultiComplexItems[id].ComplexItems[0].ComplexItemID.ToString(),
+					BuildModel.MultiComplexItems[id].ComplexItems[0].Items.Where(i => i.Name == "imageKey").ToList()[carouselId].ItemId.ToString(),
+					DateTime.Now.ToString("yy-MM-dd_hh-mm-ss"));
+
+				await PictureService.SavePictureToDisk(ImageSource.FromStream(() => mediaFile.Source), fileName);
+
+				var image = PictureService.GetPictureFromDisk(fileName);
+
+				BuildModel.MultiComplexItems[id].ComplexItems[subId].Items.Where(it => it.Name == "imageKey").ToList()[carouselId].Images.Add(fileName + ".jpg");
+				BuildModel.MultiComplexItems[id].ComplexItems[subId].ItemImageModels[carouselId].Add(image);
+				UpdatePhotos();
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex.Message);
+				await UserDialog.AlertAsync("Saving photo failed!", "Warning!", "Ok");
+			}
+		}
+
+        // ToDo: need to check this method (UpdatePhotos()) and fix adding images to list!
+        private void UpdatePhotos()
+		{
+		    try
+		    {
+                PollPictures = null;
+                PollPictures = new ObservableCollection<ObservableCollection<ComplexItemPhotosModel>>();
+                for (int i = 0; i < BuildModel.MultiComplexItems.Count; i++)
+                {
+                    var listOfImageSources = new ObservableCollection<ComplexItemPhotosModel>();
+                    for (int j = 0; j < BuildModel.MultiComplexItems[i].ComplexItems.Count; j++)
+                    {
+
+                        var ciom = new ComplexItemPhotosModel();
+                        if (BuildModel.MultiComplexItems[i].ComplexItems[j].ItemImageModels.Count != 0)
+                        {
+                            var imageCollections = new List<int>();
+                            if (BuildModel.MultiComplexItems[i].ComplexItems[j].Items.Where(it => it.Name == "imageKey").Count() != 0)
+                            {
+                                foreach (var collection in BuildModel.MultiComplexItems[i].ComplexItems[j].Items.Where(it => it.Name == "imageKey"))
+                                {
+                                    imageCollections.Add(collection.Images.Count);
+                                }
+                            }
+                            ciom.Pictures = imageCollections;
+                        }
+                        listOfImageSources.Add(ciom);
+                    }
+                    PollPictures.Add(listOfImageSources);
+                }
+                MessagingCenter.Send<PollPageModel>(this, "onImageInteracted");
+            }
+            catch (Exception e)
+		    {
+                string message = e.Message;
+                Debug.WriteLine("Error: {0}", message);
+
+                #if DEBUG
+                UserDialog.AlertAsync(message, "Error!", "OK");
+                #else
+                UserDialog.AlertAsync("Internal error!", "Warning!", "OK");
+                #endif
+            }
+        }
     }
 }

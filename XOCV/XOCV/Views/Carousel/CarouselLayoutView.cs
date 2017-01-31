@@ -80,13 +80,13 @@ namespace XOCV
 		{
 			BackgroundColor = Color.White;
 
-			var FonImage = new CachedImage
+			var FonImage = new Image
 			{
 				HorizontalOptions = LayoutOptions.FillAndExpand,
 				VerticalOptions = LayoutOptions.FillAndExpand,
 			};
 
-			FonImage.SetBinding(CachedImage.ImageUrlProperty, new Binding("Image"));
+			FonImage.SetBinding(Image.SourceProperty, new Binding("Image"));
 
 			Content = new Grid
 			{

@@ -1,8 +1,6 @@
-﻿using System.Collections.ObjectModel;
-using FreshMvvm;
+﻿using FreshMvvm;
 using Xamarin.Forms;
 using XOCV.Models;
-using XOCV.Models.ResponseModels;
 using XOCV.PageModels;
 using XOCV.PageModels.Popups;
 
@@ -12,7 +10,7 @@ namespace XOCV.Pages.MasterDetailPage
     {
         public MDPage ()
         {
-			MessagingCenter.Subscribe<MenuPageModel, ContentModel>(this, "OnDetailChanged", (sender, arg) =>
+            MessagingCenter.Subscribe<MenuPageModel, ContentModel>(this, "OnDetailChanged", (sender, arg) =>
 		    {
 			    IsPresented = false;
 				var detailPage = FreshPageModelResolver.ResolvePageModel<HomePageModel>(arg.ListOfCompanies);
@@ -33,11 +31,17 @@ namespace XOCV.Pages.MasterDetailPage
                 Detail = new FreshNavigationContainer (detailPage);
             });
 
-            MessagingCenter.Subscribe<DBModel, DBModel> (this, "OnDeleteCapture", (sender, arg) => 
+            MessagingCenter.Subscribe<DBModel> (this, "OnDeleteCapture", (sender) => 
             {
 				var detailPage = FreshPageModelResolver.ResolvePageModel<FormDetailsPageModel> (FormDetailsPageModel.initDataToReturn);
                 Detail = new FreshNavigationContainer (detailPage);
             });
+
+			MessagingCenter.Subscribe<FormDetailsPageModel>(this, "OnDeleteCapture", (sender) =>
+		   {
+			   var detailPage = FreshPageModelResolver.ResolvePageModel<FormDetailsPageModel>(FormDetailsPageModel.initDataToReturn);
+			   Detail = new FreshNavigationContainer(detailPage);
+		   });
 
 			MessagingCenter.Subscribe<PhotoSignaturePageModel>(this, "OnPhotoEdit", (obj) => { IsGestureEnabled = false; });
 
@@ -46,9 +50,6 @@ namespace XOCV.Pages.MasterDetailPage
 			MessagingCenter.Subscribe<GalleryPageModel>(this, "OnPhotoEdit", (obj) => { IsGestureEnabled = false; });
 
 			MessagingCenter.Subscribe<GalleryPageModel>(this, "OnPhotoEditFinishing", (obj) => { IsGestureEnabled = true; });
-
-			//var detailPage1 = FreshPageModelResolver.ResolvePageModel<HomePageModel>();
-			//Detail = new FreshNavigationContainer(detailPage1);
 
             Master = new MenuPage ();
             MasterBehavior = MasterBehavior.Popover;

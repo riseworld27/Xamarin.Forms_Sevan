@@ -7,6 +7,8 @@ using Xamarin.Forms;
 using System.Linq;
 using XOCV.Pages;
 using System;
+using HockeyApp.iOS;
+using System.Reflection;
 
 namespace XOCV.iOS
 {
@@ -28,11 +30,21 @@ namespace XOCV.iOS
         //
         public override bool FinishedLaunching (UIApplication app, NSDictionary options)
         {
+            UIApplication.SharedApplication.IdleTimerDisabled = true;
 			ComponentPro.Licensing.Common.LicenseManager.SetLicenseKey("669A85ABDA76DB56D60336C89D5CAA6D813ED9B6D456C00FF452B7E59A689719");
 			Forms.Init ();
             LoadApplication (new App ());
             ImageCircle.Forms.Plugin.iOS.ImageCircleRenderer.Init ();
 
+			// CarouselView
+			var cv = typeof(CarouselView);
+			Assembly.Load(cv.FullName);
+
+			//-- Hokey App--//
+			var manager = BITHockeyManager.SharedHockeyManager;
+			manager.Configure("cec6b4d912c34c82ae4354be416d9910");
+			manager.StartManager();
+			manager.Authenticator.AuthenticateInstallation(); // This line is obsolete in crash only builds
             return base.FinishedLaunching (app, options);
         }
 

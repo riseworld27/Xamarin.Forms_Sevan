@@ -64,7 +64,7 @@
     <WarningLevel>4</WarningLevel>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <ConsolePause>false</ConsolePause>
-    <CodesignKey>iPhone Developer: Kristof Coolsaet (JH2A3PELD8)</CodesignKey>
+    <CodesignKey>iPhone Developer: KENNEN PALM (6H4GQLWG87)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <MtouchSdkVersion>
@@ -82,7 +82,7 @@
     <MtouchTlsProvider>Default</MtouchTlsProvider>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <MtouchFloat32>False</MtouchFloat32>
-    <CodesignProvision>fbe40fe5-3189-482e-9b1d-c502b38981c1</CodesignProvision>
+    <CodesignProvision>c6a281f9-b334-40fa-9af7-61d4d71016a8</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>none</DebugType>
@@ -118,7 +118,6 @@
     <Compile Include="Extensions\StringHeight.cs" />
     <Compile Include="Helpers\Camera.cs" />
     <Compile Include="Helpers\Settings.cs" />
-    <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="PlatformSpecific\BaseUrl_iOS.cs" />
     <Compile Include="PlatformSpecific\Camera\MediaPicker.cs" />
@@ -134,7 +133,6 @@
     <Compile Include="Services\EmailService.cs" />
     <Compile Include="Services\FtpService.cs" />
     <Compile Include="Services\SQLiteIOSService.cs" />
-    <Compile Include="Services\ZipService.cs" />
     <None Include="app.config" />
     <None Include="Resources\BebasNeueRegular.ttf" />
     <None Include="Entitlements.plist">
@@ -189,6 +187,10 @@
     <Compile Include="Renderers\CarouselLayoutRenderer.cs" />
     <Compile Include="Renderers\CachedImageRenderer.cs" />
     <Compile Include="Controls\CachedImageControl.cs" />
+    <Compile Include="Renderers\AutoresizedEditorRenderer.cs" />
+    <Compile Include="Main.cs" />
+    <BundleResource Include="Resources\selected_circle.png" />
+    <BundleResource Include="Resources\unselected_circle.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Icon-60%403x.png" />
@@ -350,6 +352,15 @@
     </Reference>
     <Reference Include="SDWebImage">
       <HintPath>..\..\packages\Xamarin.SDWebImage.3.7.5\lib\Xamarin.iOS\SDWebImage.dll</HintPath>
+    </Reference>
+    <Reference Include="HockeySDK">
+      <HintPath>..\..\packages\HockeySDK.Xamarin.4.1.0\lib\Xamarin.iOS10\HockeySDK.dll</HintPath>
+    </Reference>
+    <Reference Include="HockeySDK.iOSBindings">
+      <HintPath>..\..\packages\HockeySDK.Xamarin.4.1.0\lib\Xamarin.iOS10\HockeySDK.iOSBindings.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.CarouselView">
+      <HintPath>..\..\packages\Xamarin.Forms.CarouselView.2.3.0-pre2\lib\Xamarin.iOS10\Xamarin.Forms.CarouselView.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

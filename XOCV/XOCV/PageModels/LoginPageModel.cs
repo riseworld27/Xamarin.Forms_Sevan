@@ -9,7 +9,7 @@ using XOCV.Helpers;
 using XOCV.Interfaces;
 using XOCV.Models;
 using XOCV.Pages.MasterDetailPage;
-using XOCV.ViewModels.Base;
+using XOCV.PageModels.Base;
 
 namespace XOCV.PageModels
 {
@@ -114,7 +114,11 @@ namespace XOCV.PageModels
             {
                 Debug.WriteLine (ex.Message);
                 Dialogs.HideLoading ();
+                #if DEBUG
+                await Dialogs.AlertAsync(ex.Message, "Error!", "OK");
+                #else
                 await Dialogs.AlertAsync ("Internal error!", "Warning!", "OK");
+                #endif
             }
         }
         private void SelectCheckBoxCommandExecute()
@@ -125,6 +129,6 @@ namespace XOCV.PageModels
         {
             await Dialogs.AlertAsync(Version, "Version description", "Close");
         }
-        #endregion
+#endregion
     }
 }

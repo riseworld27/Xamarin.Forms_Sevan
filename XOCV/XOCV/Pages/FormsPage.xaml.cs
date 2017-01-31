@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
+﻿using XOCV.Pages.Base;
 
 namespace XOCV.Pages
 {
-    public partial class FormsPage : ContentPage
+    public partial class FormsPage : XOCVPage
     {
-        public FormsPage()
+        public FormsPage ()
         {
-            InitializeComponent();
+            InitializeComponent ();
         }
     }
 }

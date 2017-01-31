@@ -17,8 +17,8 @@ namespace XOCV.Services
 	public class WebApiHelper : IWebApiHelper
 	{
 		private const int DefaultMaxResponseContentBufferSize = 256000;
-		//private readonly string BaseUrl = "http://sevan.pilgrimconsulting.com/api";   // LIVE_SERVER
-		private readonly string BaseUrl = "http://35.163.41.22/api";                    // TEST_SERVER
+		private readonly string BaseUrl = "http://sevan.pilgrimconsulting.com/api";   // LIVE_SERVER
+		//private readonly string BaseUrl = "http://35.163.41.22/api";                    // TEST_SERVER
 		private string UserName { get; set; }
 		private int countOfForms { get; set; } = 0;
 
@@ -109,18 +109,17 @@ namespace XOCV.Services
 						        foreach (var item in _form.MultiComplexItems.SelectMany(multiComplexItem => multiComplexItem.ComplexItems.SelectMany(complexItem => complexItem.Items)))
 						        {
 							        item.RadioButtonItemsSource.Insert(0, "");
-									if (item.Name == "hintKey")
-									{
-										if (item.Properties.ImageUrl != null && item.Properties.ImageUrl != "" && item.Properties.ImageUrl != string.Empty)
-										{
-											string imageName = item.Properties.ImageUrl.Split('/').LastOrDefault();
-											if (item.Properties.LocalImagePath != imageName)
-											{
-												//var imageSource = ImageSource.FromUri(new Uri(item.Properties.ImageUrl));
-												item.Properties.LocalImagePath = await PictureService.SaveImageToDisk(item.Properties.ImageUrl, imageName);
-											}
-										}
-									}
+									//if (item.Name == "hintKey" && !string.IsNullOrEmpty(item.Properties.ImageUrl))
+									//{
+									//	string imageName = item.Properties.ImageUrl.Split('/').LastOrDefault();
+									//	if (item.Properties.LocalImagePath != imageName)
+									//	{
+         //                                   //var imageSource = ImageSource.FromUri(new Uri(item.Properties.ImageUrl));
+
+         //                                   // ToDo: need implement Android method before
+         //                                   //item.Properties.LocalImagePath = await PictureService.SaveImageToDisk(item.Properties.ImageUrl, imageName);
+									//	}
+									//}
 						        }
 					        }
 
@@ -180,7 +179,8 @@ namespace XOCV.Services
 							        }
 						        }
 					        }
-
+							var localContent = JsonConvert.SerializeObject(responseModel);
+							App.DataBase.SaveLocalContent(new LocalContentModel { LocalContent = localContent });
 					        return responseModel;
 				        }
 				        catch (Exception e)
@@ -193,8 +193,8 @@ namespace XOCV.Services
 			}
 			else
 			{
-				var localData = App.DataBase.GetContent().FirstOrDefault();
-				var content = JsonConvert.DeserializeObject<ContentModel>(localData.Content);
+				var localData = App.DataBase.GetLocalContent();
+				var content = JsonConvert.DeserializeObject<ContentModel>(localData.LocalContent);
 				return content;
 			}
 		}

@@ -1,14 +1,10 @@
-﻿using System.Threading.Tasks;
-using XOCV.ViewModels.Base;
+﻿using XOCV.PageModels.Base;
 using Xamarin.Forms;
 using XOCV.Models;
 using PropertyChanged;
 using XOCV.Interfaces;
-using XOCV.Models.ResponseModels;
 using System.Windows.Input;
-using FreshMvvm;
 using XOCV.Helpers;
-using XOCV.Pages;
 
 namespace XOCV.PageModels
 {

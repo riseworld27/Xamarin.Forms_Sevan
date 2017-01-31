@@ -24,7 +24,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Sevan Solutions</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.sevansolutions.mobileapp.ios</string>
+	<string>com.pilgrimconsulting.sevansolutions</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIAppFonts</key>

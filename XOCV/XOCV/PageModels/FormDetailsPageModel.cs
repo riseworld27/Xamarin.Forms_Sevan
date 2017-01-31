@@ -10,7 +10,9 @@ using XOCV.Interfaces;
 using XOCV.Models;
 using XOCV.Models.ResponseModels;
 using XOCV.Services;
-using XOCV.ViewModels.Base;
+using XOCV.PageModels.Base;
+using XOCV.Helpers;
+using Newtonsoft.Json;
 
 namespace XOCV.PageModels
 {
@@ -21,6 +23,7 @@ namespace XOCV.PageModels
         private FormModel _tempForm;
         private bool _isAllItemsSelected;
 		private long formId;
+		public bool AllowAdvancedMode { get; set; }
 		public static object initDataToReturn;
         #endregion
 
@@ -85,7 +88,9 @@ namespace XOCV.PageModels
         #region Commands
         public ICommand AddNewCaptureCommand => new Command (async () => await AddNewCaptureCommandExecute ());
         public ICommand SyncCommand => new Command (async () => await SyncCommandExecute ());
+		public ICommand DeleteCommand => new Command(async () => await DeleteCommandExecute());
         public ICommand MakeBackUpCommand => new Command(async () => await MakeBackUpCommandExecute());
+		public ICommand OpenSettingsCommand => new Command(async () => await OpenSettingsCommandExecute());
         #endregion
 
         #region Constructors
@@ -124,6 +129,11 @@ namespace XOCV.PageModels
             await CoreMethods.PushPageModel<RegistrationFormPageModel> (arg);
         }
 
+		private async Task OpenSettingsCommandExecute()
+		{
+			await CoreMethods.PushPageModel<SettingsPageModel>();
+		}
+
         private async Task SyncCommandExecute ()
         {
             if (NetworkConnectionService.IsConnected)
@@ -141,13 +151,52 @@ namespace XOCV.PageModels
                 await Task.Run (() => Dialogs.ShowLoading ("Starting sync..."));
                 foreach (var item in items)
                 {
-                    await Task.Run (() => Dialogs.ShowLoading ($"Sync form... ({syncedCount} of {itemsCount})"));
 					var content = new ProgramModel ();
                     foreach (var captureModel in item.Captures)
                     {
                         if (captureModel.SyncStatus == Enums.SyncStatus.NotSync)
                         {
                             content.SetOfForms.Add(item);
+							await Task.Run(() => Dialogs.ShowLoading("Sync images... "));
+							foreach (var poll in content.SetOfForms)
+							{
+								foreach (var form in poll.Forms)
+								{
+									foreach (var complexItemCollection in form.MultiComplexItems)
+									{
+										foreach (var complexItem in complexItemCollection.ComplexItems)
+										{
+											foreach (var formItem in complexItem.Items)
+											{
+												if (formItem.Name == "imageKey")
+												{
+													try
+													{
+														var imagesForSyncing = formItem.Images.ToList();
+
+														if (imagesForSyncing.Count <= 0) continue;
+
+														var syncImagesResult = await PictureService.SyncImages(imagesForSyncing);
+														if (syncImagesResult == false)
+														{
+															await Task.Run(() => Dialogs.HideLoading());
+															await Dialogs.AlertAsync("Sync for photos is failed!", "Warning!", "Ok!");
+															return;
+														}
+													}
+													catch (Exception ex)
+													{
+														var resEx = ex.Message;
+														await UserDialogs.Instance.AlertAsync("FTP is not available!", "WARNING!", "OK");
+														return;
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+							await Task.Run(() => Dialogs.ShowLoading($"Sync form... ({syncedCount} of {itemsCount})"));
                             bool success = await WebApiHelper.PostAllContent(content);
                             if (!success)
                             {
@@ -170,45 +219,6 @@ namespace XOCV.PageModels
                                 return;
                             }
                             syncedCount = success ? syncedCount + 1 : syncedCount;
-                            await Task.Run(() => Dialogs.ShowLoading("Sync images... "));
-                            foreach (var poll in content.SetOfForms)
-                            {
-                                foreach (var form in poll.Forms)
-                                {
-									foreach (var complexItemCollection in form.MultiComplexItems)
-                                    {
-										foreach (var complexItem in complexItemCollection.ComplexItems)
-                                        {
-											foreach (var formItem in complexItem.Items)
-											{
-												if (formItem.Name == "imageKey")
-												{
-													try
-													{
-													    var imagesForSyncing = formItem.Images.ToList();
-
-                                                        if (imagesForSyncing.Count <= 0) continue;
-
-													    var syncImagesResult = await PictureService.SyncImages(imagesForSyncing);
-													    if (syncImagesResult == false)
-													    {
-													        await Task.Run(() => Dialogs.HideLoading());
-													        await Dialogs.AlertAsync("Sync for photos is failed!", "Warning!", "Ok!");
-													        return;
-													    }
-													}
-													catch (Exception ex)
-													{
-														var resEx = ex.Message;
-														await UserDialogs.Instance.AlertAsync("FTP is not available!", "WARNING!", "OK");
-														return;
-													}
-												}
-											}
-                                        }
-                                    }
-                                }
-                            }
                         }
                     }
                 }
@@ -232,17 +242,100 @@ namespace XOCV.PageModels
             }
         }
 
+		private async Task DeleteCommandExecute()
+		{
+			foreach (var item in DbModels)
+				App.DataBase.SaveContent(item);
+			var items = App.DataBase.GetContent(getOnlySelected: true);
+			int itemsCount = items.Count();
+			if (items.Count == 0)
+			{
+				await UserDialogs.Instance.AlertAsync("Nothing to delete", null, "Ok!");
+			}
+			else 
+			{
+				var result = await UserDialogs.Instance.ConfirmAsync(string.Format("Do you really want to delete {0} records? It can’t be undone", itemsCount), "Warning!", "Yes", "No");
+
+				if (result)
+				{
+					foreach (var item in items)
+					{
+						await Task.Run(() => App.DataBase.DeleteItem(item));
+					}
+				}
+				MessagingCenter.Send<FormDetailsPageModel>(this, "OnDeleteCapture");
+			}
+		}
+
         private async Task MakeBackUpCommandExecute()
         {
-            Dialogs.ShowLoading("Making backup...");
-            var modelLocalDbContent = App.DataBase.GetContent().FirstOrDefault().Content;
-            if (!string.IsNullOrEmpty(modelLocalDbContent))
-            {
-                var resultBackUp = await FtpService.BackUpAllLocalDataBase(modelLocalDbContent);
-                Dialogs.Alert(resultBackUp? "Success!" : "Failed!", "Backup");
-            }
-            Dialogs.HideLoading();
+			foreach (var item in DbModels)
+				App.DataBase.SaveContent(item);
+			var items = App.DataBase.GetContent(getOnlySelected: true);
+			if (items.Count == 0) 
+			{
+				Dialogs.Alert("Nothing to backup!", null);
+				return;
+			}
+			await Task.Run(() => Dialogs.ShowLoading("Making backup..."));
+			foreach (var item in items)
+			{
+				var modelLocalDbContent = item.Content;
+				if (!string.IsNullOrEmpty(modelLocalDbContent))
+				{
+					var resultBackUp = await FtpService.BackUpAllLocalDataBase(modelLocalDbContent);
+
+					var deserializedModel = JsonConvert.DeserializeObject<ComplexFormsModel>(modelLocalDbContent);
+					foreach (var form in deserializedModel.Forms)
+					{
+						foreach (var multiComplexItems in form.MultiComplexItems)
+						{
+							foreach (var complexItem in multiComplexItems.ComplexItems)
+							{
+								foreach (var formItem in complexItem.Items)
+								{
+									if (formItem.Name == "imageKey")
+									{
+										try
+										{
+											var availableImages = formItem.Images.ToList();
+
+											if (availableImages == null | availableImages?.Count <= 0) continue;
+
+											var pictureSyncResult = await FtpService.BackUpImages(availableImages);
+
+											if (!pictureSyncResult)
+											{
+												await Task.Run(() => Dialogs.HideLoading());
+												Dialogs.Alert("Sync for photos is failed!", "Warning!", "Ok!");
+												return;
+											}
+
+											//await Task.Run(() => Dialogs.HideLoading());
+											//Dialogs.Alert(resultBackUp ? "Success!" : "Failed!", "Backup");
+										}
+										catch (Exception ex)
+										{
+											var resEx = ex.Message;
+											Dialogs.Alert("FTP is not available!", "WARNING!", "OK");
+											return;
+										}
+									}
+								}
+							}
+						}
+					}
+					await Task.Run(() => Dialogs.HideLoading());
+					Dialogs.Alert(resultBackUp ? "Success!" : "Failed!", "Backup");
+				}
+			}
         }
+
+		protected override void ViewIsAppearing(object sender, EventArgs e)
+		{
+			base.ViewIsAppearing(sender, e);
+			AllowAdvancedMode = Settings.AllowAdvancedMode;
+		}
         #endregion
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-namespace XOCV.Interfaces
+﻿namespace XOCV.Interfaces
 {
 	public interface IOrientationHandler
 	{

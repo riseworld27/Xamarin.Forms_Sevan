@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<base:XOCVPage 
+  xmlns="http://xamarin.com/schemas/2014/forms" 
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+  x:Class="XOCV.Pages.SettingsPage" 
+  xmlns:base="clr-namespace:XOCV.Pages.Base;assembly=XOCV">
+	<Grid
+    VerticalOptions = "FillAndExpand"
+    HorizontalOptions = "FillAndExpand">
+    <Grid.RowDefinitions>
+			<RowDefinition Height = "0.90*"/>
+			<RowDefinition Height = "0.10*"/>
+		</Grid.RowDefinitions>
+		<Grid
+      VerticalOptions = "FillAndExpand"
+      HorizontalOptions = "FillAndExpand">
+			<Label
+        Text = "Settings"
+        FontSize = "30"
+        FontAttributes = "Bold"
+        VerticalOptions = "Start"
+        HorizontalOptions = "CenterAndExpand"
+        Margin = "0, 20, 0, 0"/>
+			<StackLayout
+        Grid.Row = "0"
+        Orientation = "Horizontal"
+        HorizontalOptions="Center" 
+        VerticalOptions="Center">
+				<Label
+          Text = "Advanced mode"
+          FontSize = "25"
+          FontAttributes = "Bold"
+          VerticalOptions = "CenterAndExpand"
+          Margin = "0, 0, 10, 0" />
+				<Switch 
+          IsToggled = "{Binding AllowAdvancedMode, Mode=TwoWay}" />
+			</StackLayout>
+		</Grid>
+		<Grid
+      Grid.Row = "1"
+      VerticalOptions = "FillAndExpand"
+      HorizontalOptions = "FillAndExpand">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width = "*"/>
+				<ColumnDefinition Width = "*"/>
+			</Grid.ColumnDefinitions>
+			<Button
+        Grid.Column = "0"
+        WidthRequest="100"
+        Text="Apply"
+        Command="{Binding ApplyCommand}"
+        HorizontalOptions="StartAndExpand"
+        VerticalOptions="EndAndExpand"
+        TextColor="{StaticResource WhiteColor}"
+        BackgroundColor="Green"
+        Opacity="0.85"
+        Margin = "20, 0, 0, 20"/>
+			<Button
+        Grid.Column = "1"
+		    WidthRequest="100"
+		    Text="Close"
+		    Command="{Binding CloseCommand}"
+		    HorizontalOptions="EndAndExpand"
+		    VerticalOptions="EndAndExpand"
+		    TextColor="{StaticResource WhiteColor}"
+		    BackgroundColor="Red"
+		    Opacity="0.85"
+				Margin = "0, 0, 20, 20"/>
+		</Grid>
+	</Grid>
+</base:XOCVPage>

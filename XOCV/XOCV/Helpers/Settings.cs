@@ -21,6 +21,7 @@ namespace XOCV.Helpers
         private const string PasswordKey = "password_key";
         private static readonly string SettingsDefault = string.Empty;
         private const string ContentKey = "content_key";
+		private const string AdvancedModeKey = "advanced_mode_key";
         //private const string CurrentUser = "current_user";    // ToDo: waiting for Ira's feedback!
         #endregion
 
@@ -48,5 +49,11 @@ namespace XOCV.Helpers
             get { return AppSettings.GetValueOrDefault (ContentKey, new ComplexFormsModel ()); }
             set { AppSettings.AddOrUpdateValue (ContentKey, value); }
         }
+
+		public static bool AllowAdvancedMode
+		{
+			get { return AppSettings.GetValueOrDefault(AdvancedModeKey, false); }
+			set { AppSettings.AddOrUpdateValue(AdvancedModeKey, value); }
+		}
     }
 }

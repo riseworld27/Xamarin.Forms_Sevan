@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 using PropertyChanged;
 using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
-using XOCV.Enums;
 
 namespace XOCV.Models.ResponseModels
 {
@@ -28,9 +27,6 @@ namespace XOCV.Models.ResponseModels
 
         [JsonProperty(PropertyName = "isGridStyle")]
         public bool IsGridStyle { get; set; }
-
-        [JsonProperty (PropertyName = "brandingPackageType")]
-        public BrandingPackageType BrandingPackageType { get; set; }
 
         public ObservableCollection<ObservableCollection<string>> ItemImageModels { get; set; }
 

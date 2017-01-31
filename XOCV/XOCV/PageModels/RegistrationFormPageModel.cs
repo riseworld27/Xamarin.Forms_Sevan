@@ -9,7 +9,7 @@ using XOCV.Enums;
 using XOCV.Models;
 using XOCV.Extensions;
 using XOCV.Models.ResponseModels;
-using XOCV.ViewModels.Base;
+using XOCV.PageModels.Base;
 using Newtonsoft.Json;
 
 namespace XOCV.PageModels
@@ -121,7 +121,7 @@ namespace XOCV.PageModels
 			var dbModel = JsonConvert.DeserializeObject<DBModel>(o);
 			if (!isEdit)
 			{
-				dbModel.ID = App.DataBase.GetContent().Count + 2;
+				dbModel.ID = 0;
 			}
 
             foreach (var form in ComplexForm.Forms)

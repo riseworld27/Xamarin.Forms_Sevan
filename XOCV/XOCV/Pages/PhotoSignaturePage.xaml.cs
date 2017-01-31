@@ -93,13 +93,17 @@ namespace XOCV.Pages
 
 		protected override void OnBindingContextChanged()
 		{
-			base.OnBindingContextChanged();
-			this.SetBinding(ImageSizeProperty, new Binding("ImageSize", BindingMode.TwoWay));
-			pageModel = BindingContext as PhotoSignaturePageModel;
-			sourceImage.WidthRequest = pageModel.ImageSize[0];
-			sourceImage.HeightRequest = pageModel.ImageSize[1];
-			sketchImage.WidthRequest = pageModel.ImageSize[0];
-			sketchImage.HeightRequest = pageModel.ImageSize[1];
-		}
+		    base.OnBindingContextChanged();
+		    this.SetBinding(ImageSizeProperty, new Binding("ImageSize", BindingMode.TwoWay));
+		    pageModel = BindingContext as PhotoSignaturePageModel;
+
+		    if (pageModel != null)
+		    {
+                sourceImage.WidthRequest = pageModel.ImageSize[0];
+                sourceImage.HeightRequest = pageModel.ImageSize[1];
+                sketchImage.WidthRequest = pageModel.ImageSize[0];
+                sketchImage.HeightRequest = pageModel.ImageSize[1];
+            }
+        }
 	}
 }

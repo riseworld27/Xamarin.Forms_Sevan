@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using XOCV.Models.ResponseModels;
 
 namespace XOCV.Services
@@ -7,5 +8,6 @@ namespace XOCV.Services
     {
         Task<bool> SendJsonFile(ComplexFormsModel model);
         Task<bool> BackUpAllLocalDataBase(string localDbContent);
+		Task<bool> BackUpImages(List<string> imageNames);
     }
 }

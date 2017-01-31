@@ -64,6 +64,8 @@ namespace XOCV.Droid
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextColor = global::XOCV.Droid.Resource.Styleable.ProgressWheel_ahTextColor;
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextSize = global::XOCV.Droid.Resource.Styleable.ProgressWheel_ahTextSize;
 			global::Splat.Resource.String.library_name = global::XOCV.Droid.Resource.String.library_name;
+			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.ApplicationName = global::XOCV.Droid.Resource.String.ApplicationName;
+			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.Hello = global::XOCV.Droid.Resource.String.Hello;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::XOCV.Droid.Resource.Attribute.actionBarSize;
 		}
 		
@@ -120,19 +122,40 @@ namespace XOCV.Droid
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int ic_errorstatus = 2130837504;
+			public const int BackgroundGragient = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int ic_successstatus = 2130837505;
+			public const int Gradient = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int icon = 2130837506;
+			public const int ic_errorstatus = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int roundedbg = 2130837507;
+			public const int ic_successstatus = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int roundedbgdark = 2130837508;
+			public const int icon = 2130837508;
+			
+			// aapt resource value: 0x7f020005
+			public const int Line1 = 2130837509;
+			
+			// aapt resource value: 0x7f020006
+			public const int Line2 = 2130837510;
+			
+			// aapt resource value: 0x7f020007
+			public const int LogoSevan = 2130837511;
+			
+			// aapt resource value: 0x7f020008
+			public const int roundedbg = 2130837512;
+			
+			// aapt resource value: 0x7f020009
+			public const int roundedbgdark = 2130837513;
+			
+			// aapt resource value: 0x7f02000a
+			public const int selected = 2130837514;
+			
+			// aapt resource value: 0x7f02000b
+			public const int unselected = 2130837515;
 			
 			static Drawable()
 			{
@@ -194,8 +217,14 @@ namespace XOCV.Droid
 		public partial class String
 		{
 			
+			// aapt resource value: 0x7f040001
+			public const int ApplicationName = 2130968577;
+			
 			// aapt resource value: 0x7f040000
-			public const int library_name = 2130968576;
+			public const int Hello = 2130968576;
+			
+			// aapt resource value: 0x7f040002
+			public const int library_name = 2130968578;
 			
 			static String()
 			{

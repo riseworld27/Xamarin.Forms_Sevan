@@ -43,7 +43,7 @@ namespace XOCV.Models
             {
                 DBModel model = App.DataBase.GetContentById(ID);
                 App.DataBase.DeleteItem(model);
-                MessagingCenter.Send<DBModel, DBModel>(this, "OnDeleteCapture", model);
+                MessagingCenter.Send<DBModel>(this, "OnDeleteCapture");
             }
         }
         #endregion

@@ -20,6 +20,7 @@ namespace XOCV.Services
         {
             database = DependencyService.Get<ISQLite> ().GetConnection ();
             database.CreateTable<DBModel> ();
+			database.CreateTable<LocalContentModel>();
         }
 
         #region GetMetods
@@ -41,14 +42,23 @@ namespace XOCV.Services
             }
         }
 
-        public List<DBModel> GetContent ()
+        public List<DBModel> GetContent (bool getOnlySelected = false)
         {
             lock (locker)
             {
-                var result = database.GetAllWithChildren<DBModel> ();
-                return result;
+                var dBModels = database.GetAllWithChildren<DBModel>();
+                return getOnlySelected ? dBModels.Where(m => m.IsSelected).ToList() : dBModels;
             }
         }
+
+		public LocalContentModel GetLocalContent()
+		{
+			lock (locker)
+			{
+				var localContentModel = database.GetWithChildren<LocalContentModel>(1, true);
+				return localContentModel;
+			}
+		}
 
         public List<ComplexFormsModel> GetAllComplexFormContent (bool getOnlySelected = false)
         {
@@ -80,6 +90,15 @@ namespace XOCV.Services
                 database.InsertOrReplaceWithChildren (item);
             }
         }
+
+		public void SaveLocalContent(LocalContentModel localContent)
+		{
+			lock (locker)
+			{
+				localContent.ID = 1;
+				database.InsertOrReplaceWithChildren(localContent);
+			}
+		}
         #endregion
 
         #region DeleteMetods
@@ -90,14 +109,6 @@ namespace XOCV.Services
                 database.Delete (item, recursive: true);
             }
         }
-
-		//public void ClearAllDataBase()
-		//{
-		//    lock (locker)
-		//    {
-		//        database.DeleteAll<DBModel>();
-		//    }
-		//}
 		#endregion
     }
 }

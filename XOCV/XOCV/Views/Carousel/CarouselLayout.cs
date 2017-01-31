@@ -4,6 +4,7 @@ using System.Linq;
 using Xamarin.Forms;
 using System.Threading.Tasks;
 using System;
+using System.Diagnostics;
 
 namespace XOCV.Views
 {
@@ -125,7 +126,15 @@ namespace XOCV.Views
 					_stack.Children.Add(view);
 				}
 
-				if (_selectedIndex >= 0) SelectedIndex = _selectedIndex;
+				if (_selectedIndex >= 0) {
+					SelectedIndex = _selectedIndex;
+				}
+				else if (ItemsSource != null && ItemsSource.Count > 0) {
+					SelectedIndex = 0;
+				}
+				else {
+					SelectedIndex = -1;
+				}
 			}
 			catch
 			{
@@ -166,12 +175,19 @@ namespace XOCV.Views
 
 		void UpdateSelectedIndex()
 		{
-			if (SelectedItem == BindingContext) return;
+			try
+			{
+				if (SelectedItem == BindingContext) return;
 
-			SelectedIndex = Children
-				.Select(c => c.BindingContext)
-				.ToList()
-				.IndexOf(SelectedItem);
+				SelectedIndex = Children
+					.Select(c => c.BindingContext)
+					.ToList()
+					.IndexOf(SelectedItem);
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex.Message);
+			}
 		}
 
 		public event EventHandler LongPressActivated;

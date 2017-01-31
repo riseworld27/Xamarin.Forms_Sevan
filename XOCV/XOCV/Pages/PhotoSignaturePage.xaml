@@ -1,99 +1,60 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <base:XOCVPage 
-    xmlns="http://xamarin.com/schemas/2014/forms" 
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-    x:Class="XOCV.Pages.PhotoSignaturePage" 
-    xmlns:base="clr-namespace:XOCV.Pages.Base;assembly=XOCV"
-    xmlns:image="clr-namespace:XOCV.Views;assembly=XOCV">
-	<StackLayout
-			Orientation = "Vertical"
-			HorizontalOptions="FillAndExpand" 
-	    	VerticalOptions="FillAndExpand">
+  xmlns="http://xamarin.com/schemas/2014/forms" 
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+  x:Class="XOCV.Pages.PhotoSignaturePage" 
+  xmlns:base="clr-namespace:XOCV.Pages.Base;assembly=XOCV"
+  xmlns:image="clr-namespace:XOCV.Views;assembly=XOCV">
+  <StackLayout
+    Orientation = "Vertical"
+    HorizontalOptions="FillAndExpand" 
+    VerticalOptions="FillAndExpand">
 		<StackLayout 
-			    x:Name="mainStack"
-				Orientation = "Horizontal"
-			    HorizontalOptions="FillAndExpand" 
-			    VerticalOptions="FillAndExpand" >
-					<ScrollView
-							VerticalOptions = "FillAndExpand"
-							HorizontalOptions = "Start">
-							<StackLayout
-									x:Name = "colorPaletteStack"
-									Orientation = "Vertical"
-									VerticalOptions = "Start"
-									HorizontalOptions = "FillAndExpand"
-									WidthRequest = "50" >
-									<!--<Button 
-											VerticalOptions = "CenterAndExpand"
-											HorizontalOptions = "Center"
-											Margin = "0, 5, 0, 5"
-											BackgroundColor = "White"
-											WidthRequest = "40"
-											HeightRequest = "40"
-											BorderRadius = "20"/>
-									<Button 
-											VerticalOptions = "CenterAndExpand"
-											HorizontalOptions = "Center"
-											Margin = "0, 5, 0, 5"
-											BackgroundColor = "Yellow"
-											WidthRequest = "40"
-											HeightRequest = "40"
-											BorderRadius = "20"/>
-									<Button
-											VerticalOptions = "CenterAndExpand"
-											HorizontalOptions = "Center"
-											Margin = "0, 5, 0, 5"
-											BackgroundColor = "Red"
-											WidthRequest = "40"
-											HeightRequest = "40"
-											BorderRadius = "20"/>
-									<Button 
-											VerticalOptions = "CenterAndExpand"
-											HorizontalOptions = "Center"
-											Margin = "0, 5, 0, 5"
-											BackgroundColor = "Black"
-											WidthRequest = "40"
-											HeightRequest = "40"
-											BorderRadius = "20"/>-->
-							</StackLayout>
-					</ScrollView>
-					<Grid
-								HorizontalOptions="FillAndExpand" 
-					            VerticalOptions="FillAndExpand" >
-							<Image 
-									x:Name = "sourceImage"
-						            Source="{Binding MediaPath}" 
-						            Aspect="AspectFill" 
-						            HorizontalOptions="Center" 
-						            VerticalOptions="Center" />
-							<image:SketchImage 
-									x:Name = "sketchImage"
-									Source = "{Binding SketchImageSource}"
-									BackgroundColor = "Transparent"
-						            Aspect="AspectFill" 
-						            HorizontalOptions="Center" 
-						            VerticalOptions="Center" />
-					</Grid>
+      x:Name="mainStack"
+			Orientation = "Horizontal"
+			HorizontalOptions="FillAndExpand" 
+			VerticalOptions="FillAndExpand" >
+      <ScrollView
+        VerticalOptions = "FillAndExpand"
+        HorizontalOptions = "Start">
+        <StackLayout
+          x:Name = "colorPaletteStack"
+					Orientation = "Vertical"
+					VerticalOptions = "Start"
+					HorizontalOptions = "FillAndExpand"
+					WidthRequest = "50" />
+      </ScrollView>
+      <Grid
+        HorizontalOptions="FillAndExpand" 
+        VerticalOptions="FillAndExpand" >
+        <Image 
+          x:Name = "sourceImage"
+          Source="{Binding MediaPath}" 
+					Aspect="AspectFill" 
+					HorizontalOptions="Center" 
+					VerticalOptions="Center" />
+        <image:SketchImage 
+          x:Name = "sketchImage"
+          Source = "{Binding SketchImageSource}"
+          BackgroundColor = "Transparent"
+          Aspect="AspectFill" 
+          HorizontalOptions="Center" 
+          VerticalOptions="Center" />
+      </Grid>
 		</StackLayout>
 		<StackLayout
-				Orientation = "Horizontal"
-				HorizontalOptions = "FillAndExpand"
-				HeightRequest = "50">
-				<Button
-					HeightRequest = "50"
-					WidthRequest = "100"
-					VerticalOptions = "Start"
-					HorizontalOptions = "CenterAndExpand"
-					BackgroundColor = "Green"
-					Text = "Save"
-					TextColor = "White"
-					Command = "{Binding SavePictureCommand}" />
-			   <!--<Button
-					VerticalOptions = "End"
-					BackgroundColor = "Red"
-					Text = "Cancell"
-					TextColor = "White"
-					Command = "{Binding SaveSketchonImage}" />-->
+      Orientation = "Horizontal"
+			HorizontalOptions = "FillAndExpand"
+			HeightRequest = "50">
+			<Button
+        HeightRequest = "50"
+				WidthRequest = "100"
+				VerticalOptions = "CenterAndExpand"
+				HorizontalOptions = "CenterAndExpand"
+				BackgroundColor = "Green"
+				Text = "Save"
+				TextColor = "White"
+				Command = "{Binding SavePictureCommand}" />
 		</StackLayout>
 	</StackLayout>
 </base:XOCVPage>

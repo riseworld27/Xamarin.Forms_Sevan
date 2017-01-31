@@ -2,7 +2,7 @@
 {
     public enum FormStatus
     {
-        Complete,
-        Incomplete
+        Incomplete,
+        Complete
     }
 }
